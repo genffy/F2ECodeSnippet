@@ -1,0 +1,21 @@
+.g-wrap{
+	width: 100%;	
+}
+.g-col{
+	width: 100%;
+}
+.g-col2{
+	width: 50%;
+}
+.g-col3{
+	width: 33.3%;
+}
+.g-col4{
+	width: 25%;
+}
+.g-colinner{
+	padding:10px;
+}
+.g-ctn{
+	width: 100%;
+}

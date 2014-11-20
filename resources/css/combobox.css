@@ -1,0 +1,51 @@
+/* combobox样式 */
+/* 下拉组合输入框 */
+.combobox_ctn {
+    position: absolute;
+    display: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 200000010;
+}
+.combobox_inner {
+    padding: 5px;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 168px;
+    _height:expression(this.scrollHeight > 168 ? "168px" : "auto");
+}
+.combobox_inner ul.tree {
+    padding: 0;
+}
+.combobox_inner li {
+    padding: 0 2px;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #666;
+    font-size: 14px;
+}
+.combobox_inner ul.tree li {
+    padding: 0;
+}
+.combobox_inner li:hover {
+    background-color: #f4f6f8;
+}
+.combobox_inner ul.tree li:hover {
+    background: none;
+}
+.combobox_inner li.selected {
+    background-color: #ffffcc;
+}
+.combobox_ctn i.clear {
+    display: block;
+    position: absolute;
+    top: -20px;
+    right: 2px;
+    width: 18px;
+    height: 18px;
+    background: #ffffff url('../img/dropdown_clear.png') no-repeat;
+    cursor: pointer;
+}

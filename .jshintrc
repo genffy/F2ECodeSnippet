@@ -1,0 +1,7 @@
+{
+  "validthis": true,
+  "globals": {
+    "EventEmitter": true,
+    "Promise": true
+  }
+}

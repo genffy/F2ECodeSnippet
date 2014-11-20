@@ -1,0 +1,16 @@
+// 
+body {
+	font-family: 'Arial','Microsoft YaHei';
+}
+.ell {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.link {
+	color: #308dbd;
+}
+.require {
+	color: #ff0000;
+	font-style: normal;
+}

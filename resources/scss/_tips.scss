@@ -1,0 +1,49 @@
+@charset 'UTF-8';
+.util-tip {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	margin: 0;
+	z-index: 100000880;
+	text-align: center;
+	_position: absolute;
+	_top: expression(documentElement.scrollTop);
+	span {
+		display: inline-block;
+		padding: 0 30px 0 40px;
+		height: 30px;
+		margin: 0 auto;
+		color: #fff;
+		line-height: 30px;
+		text-align: center;
+		font-size: 14px;
+		i {
+			position: absolute;
+			top:0;
+			margin-left: -40px;
+			display: inline-block;
+			width: 30px;
+			height: 30px;
+			background: url('../images/icon_tip.png') no-repeat;
+		}
+		&.success {
+			background-color: #50c750;
+			i {
+				background-position: 0 -35px;
+			}
+		}
+		&.warning {
+			background-color: #50c750;
+			i {
+				background-position: 0 -70px;
+			}
+		}
+		&.error {
+			background-color: #d33030;
+			i {
+				background-position: 0 0;
+			}
+		}
+	}
+}
