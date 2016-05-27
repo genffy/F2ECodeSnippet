@@ -13,6 +13,8 @@
         function A(){
             this.a = 1;
             setTimeout(function(){
+                // 这里面的作用域是全局的
+                console.log(this == window);    
                 this.a = 2;
                 try {
                     this.b = 'b';
@@ -22,7 +24,6 @@
                 }
             },0);
             this.b = 'bbb';
-            
             console.log(this == window);
         }
         var aa = new A();

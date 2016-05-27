@@ -5,13 +5,45 @@ html, body {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    font-size: 10px;
 }
 section {
+    position: relative;
     height: 100%;
     width: 100%;
     overflow: hidden;
     text-align: center;
     color: #fff;
+}
+// 动画
+@keyframes twinkling {
+	0%{
+		opacity:.2;
+	}
+	50%{
+		opacity:1;
+	}
+    100% {
+        opacity:.2;
+    }
+}
+.handler {
+    animation-name:twinkling;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function:  ease-in-out;
+    animation-fill-mode: both;
+    
+    position: absolute;
+    margin: 0 auto;
+    padding: 0;
+    bottom: 1.5rem;
+    width: 1rem;
+    height: 1rem;
+    background: transparent;
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 0 1em #fff;
 }
 h2 {
     
