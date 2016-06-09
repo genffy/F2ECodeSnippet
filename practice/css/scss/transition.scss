@@ -1,0 +1,123 @@
+html, body {
+	padding: 0;
+	font-size: 16px;
+}
+.ad-list  {
+	overflow: hidden;/*简单的处理清除浮动*/
+	margin: 20px auto;
+	padding: 10px 0;
+	.ad-item {
+		list-style: none;
+		display: inline-block;
+		width: 113px;
+		height: 113px;
+		padding: 5px;
+		.ad {
+			border: 1px solid #ccc;
+			position: relative;
+			overflow: hidden;
+			box-sizing: border-box;
+			width: 100%;
+			height: 100%;
+			a {
+				display: inline-block;
+				width: 100%;
+				height: 100%;
+				text-decoration: none;
+				img {
+					width: 100%;
+					height: 100%;
+				}			
+			}
+			.cover, .content, .animate {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+			}
+			.animate {
+				transition-property: bottom;
+				transition-duration: 300ms;
+				transition-timing-function: ease;
+				bottom: -100%;
+				.cover, .content {
+					top: 0;
+				}
+				.cover {
+					background: #00a57f;
+					opacity: .8;
+				}
+				.content {
+					z-index: 100;
+					color: #fff;
+					padding: 0.5rem;
+					box-sizing: border-box;
+					h1,p {
+						margin: 0;
+					}
+					h1 {
+						margin-bottom: 5px;
+						font-size: 1.5rem;
+					}
+					em {
+						
+					}
+					p{
+						font-size: 0.9rem;
+					}
+				}
+			}
+			// 不同方向的动画
+			&.top {
+				.animate {
+					transition-property: top;
+					top: -100%;
+				}
+				&:hover{
+					.animate {
+						top: 0;
+					}
+				}	
+			}
+			&.left {
+				.animate {
+					transition-property: left;
+					left: -100%;
+				}
+				&:hover{
+					.animate {
+						left: 0;
+					}
+				}	
+			}
+			&.right {
+				.animate {
+					transition-property: right;
+					right: -100%;
+				}
+				&:hover{
+					.animate {
+						right: 0;
+					}
+				}	
+			}
+			&.bottom {
+				.animate {
+					transition-property: bottom;
+					bottom: -100%;
+				}
+				&:hover{
+					.animate {
+						bottom: 0;
+					}
+				}	
+			}
+			&:hover{
+				.animate {
+					bottom: 0;
+				}
+			}
+		}
+		
+	}
+	
+} 

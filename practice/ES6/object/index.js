@@ -1,0 +1,8 @@
+class Shap {
+	draw() {
+		
+	}
+	area() {
+		
+	}
+}
