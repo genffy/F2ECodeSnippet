@@ -4,14 +4,32 @@
 	<meta charset="UTF-8">
 	<title>input布局</title>
 	<link rel="stylesheet" href="./scss/input.css">
+	<meta name="viewport" content="width=320, initial-scale=1, maximum-scale=1, user-scalable=no" servergenerated="true">
 </head>
 <body>
-	<div class="warp">
-		<h1>这里是一点内容</h1>
-		<div class="fix-bottom">
-			<i class="icon right"></i>
-			<button class="btn left"></button>
+	<div class="wrap">
+		<h1>padding+负边距</h1>
+		<div class="fix-bottom normal">
+			<i class="icon left"></i>
+			<button class="btn right"></button>
 			<div class="content"><input type="text" placeholder="请输入需要搜索的内容"></div>
+		</div>
+		<h1>display: box</h1>
+		<div class="fix-bottom box">
+			<i class="icon left"></i>
+			<div class="content"><input type="text" placeholder="请输入需要搜索的内容"></div>
+			<button class="btn right"></button>
+		</div>
+		<h1>display: flex</h1>
+		<div class="fix-bottom flex">
+			<i class="icon left"></i>
+			<div class="content"><input type="text" placeholder="请输入需要搜索的内容"></div>
+			<button class="btn right"></button>
+		</div>
+		<div class="fix-bottom normal mobile">
+			<i class="icon left"></i>
+			<button class="btn right"></button>
+			<div class="content"><input type="text" placeholder="据说会有键盘啥的兼容性问题？"></div>
 		</div>
 	</div>
 </body>
