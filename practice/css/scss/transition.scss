@@ -38,7 +38,6 @@ html, body {
 				transition-property: bottom;
 				transition-duration: 300ms;
 				transition-timing-function: ease;
-				bottom: -100%;
 				.cover, .content {
 					top: 0;
 				}
@@ -71,9 +70,11 @@ html, body {
 				.animate {
 					transition-property: top;
 					top: -100%;
+					left: 0;
 				}
 				&:hover{
 					.animate {
+						transition-property: top;
 						top: 0;
 					}
 				}	
@@ -82,42 +83,41 @@ html, body {
 				.animate {
 					transition-property: left;
 					left: -100%;
+					top: 0;
 				}
 				&:hover{
 					.animate {
+						transition-property: left;
 						left: 0;
 					}
 				}	
 			}
 			&.right {
 				.animate {
-					transition-property: right;
-					right: -100%;
+					transition-property: left;
+					left: 100%;
+					top: 0;
 				}
 				&:hover{
 					.animate {
-						right: 0;
+						transition-property: left;
+						left: 0;
 					}
 				}	
 			}
 			&.bottom {
 				.animate {
-					transition-property: bottom;
-					bottom: -100%;
+					transition-property: top;
+					top: 100%;
+					left: 0;
 				}
 				&:hover{
 					.animate {
-						bottom: 0;
+						transition-property: top;
+						top: 0;
 					}
 				}	
 			}
-			&:hover{
-				.animate {
-					bottom: 0;
-				}
-			}
 		}
-		
 	}
-	
 } 

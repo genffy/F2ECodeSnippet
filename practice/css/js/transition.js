@@ -1,8 +1,8 @@
 // mouse direction
 // pageX, pageY is mouseenter or mouseleave
-function mouseDirection(eleP, pageX, pageY){
+function mouseDirection(eleP, pageX, pageY, diff){
 	var dir = '',
-		diff = 0, 
+		diff = diff || 0, 
 		P = {
 			top: eleP.top + diff,
 			right: eleP.right - diff,
@@ -36,29 +36,31 @@ function dealClassName(element, toAdd){
 	}
 }
 window.onload = function(event){
-	var wrap = document.querySelectorAll('#ad_list'),
-		adWrapList = wrap[0].querySelectorAll('.ad-item'),
-		adList = wrap[0].querySelectorAll('.ad');
-	adList.forEach(function(element) {
-		(function(el){
-			var cur = 0,
-				elePosition = el.getBoundingClientRect();
-			el.onmouseenter = function(e){
-				var dir = mouseDirection(elePosition, e.pageX, e.pageY);
-				dealClassName(el, dir);
-				console.log('enter', dir);
-			};
-		})(element);
+	var wrap = document.getElementById('ad_list'),
+		adWrapList = wrap.getElementsByClassName('ad-item'),
+		adList = wrap.getElementsByClassName('ad');
+	// 提前判断是否进入
+	Array.from(adList).forEach(function(element) {
+		var cur = 0,
+			elePosition = element.getBoundingClientRect();
+		element.onmouseenter = function(e){
+			var dir = mouseDirection(elePosition, e.pageX, e.pageY);
+			dealClassName(element, dir);
+		};
 	});
-	adWrapList.forEach(function(element){
-		(function(el){
-			var cur = 0,
-				elePosition = el.getBoundingClientRect();
-			el.onmouseleave = function(e){
-				var dir = mouseDirection(elePosition, e.pageX, e.pageY);
-				dealClassName(el, dir);
-				console.log('leave', dir);
-			};
-		})(element);
+	// 提前预测是否移出
+	Array.from(adWrapList).forEach(function(element){
+		var cur = 0,
+			elePosition = element.getBoundingClientRect();
+		// element.onmouseleave = function(e){
+		// 	var dir = mouseDirection(elePosition, e.pageX, e.pageY);
+		// 	dealClassName(element, dir);
+		// };
+		element.onmousemove = function(e){
+			var dir = mouseDirection(elePosition, e.pageX, e.pageY, 10);
+			if(dir){
+				dealClassName(element, dir);
+			}
+		};
 	});
 }
