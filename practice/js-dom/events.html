@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Dom</title>
+	<style>
+		.box {
+			margin: 10px;
+			border: 1px solid #ccc;
+			width: 250px;
+		}
+		.box ul {
+			padding: 0;
+		}
+		.box li {
+			list-style: none;
+			display: inline-block;
+		}
+		.box > span, .box .item {
+			display: inline-block;
+			border: 1px solid #ccc;
+			margin: 5px;
+			padding: 6px 12px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<h1>事件及代理</h1>
+	<p>1. 一个id为box的容器里有若干个子items，如何绑定事件，只对该item上的点击事件做处理</p>
+	<p>2. 一个id为box的容器里有若干个 class 名为 item 的元素，如何绑定事件，对该item上的点击事件做处理(后面了的时候才发现考察的是选择器性能这个点)</p>
+	<div class="box" id="box"><span>子元素1 <span>这里面可能还有元素</span></span><span>子元素2 <button>有个button也不一定</button></span><span>子元素3</span><span>子元素4</span><span>子元素5</span><span>子元素6</span><span>子元素7</span><span>子元素8</span><span>子元素9</span><span>子元素10</span></div>
+	
+	<div class="box" id="box2">
+		<ul>
+			<li><span class="item">子元素1</span></li>
+			<li><span class="item">子元素2</span></li>
+			<li><span class="item">子元素3</span></li>
+			<li><span class="item">子元素4</span></li>
+			<li><span class="item">子元素5</span></li>
+			<li><span class="item">子元素6</span></li>
+			<li><span class="item">子元素7</span></li>
+			<li><span class="item">子元素8</span></li>
+			<li><span class="item">子元素9</span></li>
+			<li><span class="item">子元素10</span></li>
+			<li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li><li><span class="item">子元素10</span></li>
+		</ul>
+	</div>
+	<script>
+		function addEventHandler(element, type, handler){
+			if(element.addEventListener){
+				element.addEventListener(type, handler, false);
+			}else if(elemet.attatchEvent){
+				elemet.attatchEvent("on"+type, handler);
+			}else {
+				element["on"+type] = handler;
+			}
+		}
+		
+		window.onload = function(){
+			var box1 = document.getElementById("box");
+			// 委托
+			addEventHandler(box1, "click", function(e){
+				var target = e.target || e.srcElemet; 
+				if( target && target.parentNode ==  box1){
+					alert("能找到准确的点击元素了");
+				}
+			});
+			
+			var box2 = document.getElementById("box2"),
+				items = box2.getElementsByClassName("item");	
+			for(var i=0, len = items.length; i < len; i++){
+				var item = items[i];
+				addEventHandler(items[i], "click", function(e){
+					var target = e.target || e.srcElemet; 
+					if( target && target.className.indexOf('item')!=-1){
+						alert("能找到准确的class名为item的点击元素了:"+target.innerHTML);
+					}
+				});
+			}
+			
+			// TODO 本想做个选择选择器的性能测试的，但是效果不是很明显 另外，浏览器对选择器是有缓存功能的
+			/*
+			// 添加节点测试
+			var dcoFrg = document.createDocumentFragment();
+			for(var j = 0; j< 10000; j++){
+				var s = document.createElement('li');	
+				s.innerHTML = "<span class='item'>子元素"+ j+"</span>";
+				dcoFrg.appendChild(s);
+			}
+			box2.getElementsByTagName('ul')[0].appendChild(dcoFrg);
+			
+			console.log('document start ======',(new Date).getTime());
+			document.getElementsByClassName("item");
+			console.log('document end ======',(new Date).getTime());
+
+			console.log('box2 start ======',(new Date).getTime());
+			box2.getElementsByClassName("item");
+			console.log('box2 end ======',(new Date).getTime());
+			*/
+		}
+	</script>
+</body>
+</html>
