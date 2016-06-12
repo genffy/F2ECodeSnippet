@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>HOW JSONP WORK</title>
+</head>
+<body>
+	<h1>HOW JSONP WORKED</h1>
+	<p>有个面试是问JSONP是怎么工作的，其核心就是利用script、img、link等标签可以跨域访问。</p>
+	<button id="jsonp">点我进行跨域访问</button>
+	<script>
+		JSONP_CALLBACK = function(data){
+			//alert("jsonp执行了"+data);
+			alert("jsonp执行了"+data.data.name);
+		}
+		window.onload = function(){
+			document.getElementById("jsonp").addEventListener("click", function(){
+				var url = 'http://localhost:8088/jsonp?jsonp_callback=JSONP_CALLBACK',
+				scriptNode = document.createElement("script");
+				scriptNode.src = url;
+				document.body.appendChild(scriptNode);
+			}, false);
+		}
+	</script>
+</body>
+</html>
