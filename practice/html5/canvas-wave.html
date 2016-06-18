@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>canvas实现波浪曲线</title>
+    <link rel="stylesheet" href="./stylesheets/wave.css"/>
+</head>
+<body>
+    <canvas id="waves" class="waves" width="2664" height="680" style="width: 2664.2px; height: 680px;"></canvas>
+</body>
+<script src="./libs/jquery-2.1.4.min.js"></script>
+<script src="./js/wave.js"></script>
+<script>
+    $(function() {
+        $("#waves").sineWaves({
+            speed: 8,
+            width: function() {
+                var a = $(document).width();
+                return 768 > a ? 3 * $("#waves").parent().width() : 1.4 * $("#waves").parent().width()
+            },
+            height: function() {
+                return $("#waves").parent().height()
+            },
+            wavesWidth: "100%",
+            ease: "SineInOut",
+            waves: [{
+                timeModifier: .5,
+                lineWidth: 2,
+                amplitude: 200,
+                wavelength: 200,
+                segmentLength: 1
+            }, {
+                timeModifier: .5,
+                lineWidth: 2,
+                amplitude: 150,
+                wavelength: 150,
+                segmentLength: 1
+            }, {
+                timeModifier: .5,
+                lineWidth: 2,
+                amplitude: 100,
+                wavelength: 100,
+                segmentLength: 1
+            }],
+            initialize: function() {},
+            resizeEvent: function() {
+                var a = this.ctx.createLinearGradient(0, 0, this.width, 0);
+                a.addColorStop(0, "rgba(255, 255, 255, 0)"), a.addColorStop(.5, "rgba(255, 255, 255, 0.2)"), a.addColorStop(1, "rgba(255, 255, 255, 0)");
+                for (var b = -1, c = this.waves.length; ++b < c;) this.waves[b].strokeStyle = a;
+                b = void 0, c = void 0, a = void 0
+            }
+        });
+    });
+</script>
+</html>

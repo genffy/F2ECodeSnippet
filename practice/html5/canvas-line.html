@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>canvas关于直线的一些操作</title>
+</head>
+<body>
+    <h1 style="text-align: center;">星空</h1>
+    <button style="display:block;line-height:1.5em;margin:5px auto;" onclick="refreshStar()">刷星</button>
+    <canvas id="star" style="display: block;border: 1px solid #ccc;margin: 0 auto;"></canvas>
+</body>
+
+<script>
+    var starCan = document.getElementById("star");
+    var starCtn = starCan.getContext("2d");
+    window.onload = function(){
+        starCan.width = 933;
+        starCan.height = 622;
+        setInterval(function(){
+            refreshStar();
+        },500);
+    };
+    // 刷星
+    function refreshStar(){
+        starCtn.clearRect(0, 0, starCan.width, starCan.height);
+        starCtn.save();
+        starCtn.strokeStyle = "#ccc";
+        starCtn.lineWidth=0.5;
+        //做个网格，方便看看画得准不准
+        for (var i=0;i<starCan.width;i++)
+        {
+            for (var i2=0;i2<starCan.height;i2++)
+            {
+                starCtn.strokeRect(i2*10, i*10, 10, 10);
+            }
+        }
+        starCtn.restore();
+        for(var i=0; i<350; i++){
+            // ramdom
+            var x = Math.random() * starCan.width,
+                y = Math.random() * starCan.height,
+                R = Math.random(),
+                sR = R * 20,
+                bR = R * 50;
+            renderRandomStar(starCtn ,x, y, sR, bR, 5);
+        }
+    }
+    // 绘制小星星
+    /**
+     *
+     * @param x x坐标
+     * @param y y坐标
+     * @param sR 内圆半径
+     * @param bR 外园半径
+     * @param n 角的个数 {3,7}
+     */
+    function renderRandomStar(ctn ,x, y, sR, bR, n){
+        if(n < 3 || n > 7){
+            return ;
+        }
+        ctn.save();
+        // 随机颜色
+        ctn.rotate(Math.random()*10*Math.PI);
+        ctn.beginPath();
+        ctn.strokeStyle = "transparent";
+        // 不同的 n 绘制的线条数不一样
+        // 坐标需要根据sR&bR计算
+        var per = Math.PI/n;
+        ctn.moveTo(x+sR*Math.cos(per), y+sR*Math.sin(per));
+        for(var i= 2; i <= 2*n; i++){
+            if(i%2==0){
+                ctn.lineTo(x+bR*Math.cos(i*per), y+bR*Math.sin(i*per));
+            }else{
+                ctn.lineTo(x+sR*Math.cos(i*per), y+sR*Math.sin(i*per));
+            }
+        }
+        ctn.lineTo(x+sR*Math.cos(per), y+sR*Math.sin(per));
+        ctn.closePath();
+        ctn.stroke();
+        ctn.fillStyle = "rgba("+parseInt(Math.random()*255)+", "+parseInt(Math.random()*255)+", "+parseInt(Math.random()*255)+", "+Math.random()+")";
+        ctn.fill();
+        ctn.restore();
+    }
+</script>
+</html>

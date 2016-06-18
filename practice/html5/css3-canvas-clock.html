@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>CSS3和Canvas分别实现的时钟</title>
+    <link rel="stylesheet" href="./stylesheets/clock.css"/>
+</head>
+<body>
+    <h1>CSS3时钟</h1>
+    <div class="clock">
+        <ul class="panel">
+            <li><i index="1"></i></li>
+            <li><i index="2"></i></li>
+            <li><i index="3"></i></li>
+            <li><i index="4"></i></li>
+            <li><i index="5"></i></li>
+            <li><i index="6"></i></li>
+            <li><i index="7"></i></li>
+            <li><i index="8"></i></li>
+            <li><i index="9"></i></li>
+            <li><i index="10"></i></li>
+            <li><i index="11"></i></li>
+            <li><i index="12"></i></li>
+            <li><i index="13"></i></li>
+            <li><i index="14"></i></li>
+            <li><i index="15" data-num="3"></i></li>
+            <li><i index="16"></i></li>
+            <li><i index="17"></i></li>
+            <li><i index="18"></i></li>
+            <li><i index="19"></i></li>
+            <li><i index="20"></i></li>
+            <li><i index="21"></i></li>
+            <li><i index="22"></i></li>
+            <li><i index="23"></i></li>
+            <li><i index="24"></i></li>
+            <li><i index="25"></i></li>
+            <li><i index="26"></i></li>
+            <li><i index="27"></i></li>
+            <li><i index="28"></i></li>
+            <li><i index="29"></i></li>
+            <li><i index="30" data-num="6"></i></li>
+            <li><i index="31"></i></li>
+            <li><i index="32"></i></li>
+            <li><i index="33"></i></li>
+            <li><i index="34"></i></li>
+            <li><i index="35"></i></li>
+            <li><i index="36"></i></li>
+            <li><i index="37"></i></li>
+            <li><i index="38"></i></li>
+            <li><i index="39"></i></li>
+            <li><i index="40"></i></li>
+            <li><i index="41"></i></li>
+            <li><i index="42"></i></li>
+            <li><i index="43"></i></li>
+            <li><i index="44"></i></li>
+            <li><i index="45" data-num="9"></i></li>
+            <li><i index="46"></i></li>
+            <li><i index="47"></i></li>
+            <li><i index="48"></i></li>
+            <li><i index="49"></i></li>
+            <li><i index="50"></i></li>
+            <li><i index="51"></i></li>
+            <li><i index="52"></i></li>
+            <li><i index="53"></i></li>
+            <li><i index="54"></i></li>
+            <li><i index="55"></i></li>
+            <li><i index="56"></i></li>
+            <li><i index="57"></i></li>
+            <li><i index="58"></i></li>
+            <li><i index="59"></i></li>
+            <li><i index="60" data-num="12"></i></li>
+        </ul>  
+        <div class="pointer">
+            <div id="hour"></div>
+            <div id="min"></div>
+            <div id="sec"></div>
+        </div>
+    </div>
+    <h1>Canvas时钟</h1>
+    <div class="clock">
+        <canvas id="c-panel"></canvas>
+        <canvas id="c-pointer"></canvas>
+    </div>
+</body>
+<script src="./js/clock.js"></script>
+</html>

@@ -1,0 +1,193 @@
+@function _length($number, $unit) {
+  $strings: 'px' 'cm' 'mm' '%' 'ch' 'pica' 'in' 'em' 'rem' 'pt' 'pc' 'ex' 'vw' 'vh' 'vmin' 'vmax';
+  $units:   1px  1cm  1mm  1%  1ch  1pica  1in  1em  1rem  1pt  1pc  1ex  1vw  1vh  1vmin  1vmax;
+  $index: index($strings, $unit);
+
+  @if not $index {
+    @warn "Unknown unit `#{$unit}`.";
+    @return false;
+  }
+
+  @return $number * nth($units, $index);
+}
+
+@function number($string) {
+  // Matrices
+  $strings: '0' '1' '2' '3' '4' '5' '6' '7' '8' '9';
+  $numbers:  0   1   2   3   4   5   6   7   8   9;
+
+  // Result
+  $result: 0;
+  $divider: 0;
+  $minus: false;
+
+  // Looping through all characters
+  @for $i from 1 through str-length($string) {
+    $character: str-slice($string, $i, $i);
+    $index: index($strings, $character);
+
+
+    @if $character == '-' {
+      $minus: true;
+    }
+
+    @else if $character == '.' {
+      $divider: 1;
+    }
+
+    @else {
+      @if not $index {
+        $result: if($minus, $result * -1, $result);
+        @return _length($result, str-slice($string, $i));
+      }
+
+      $number: nth($numbers, $index);
+
+      @if $divider == 0 {
+        $result: $result * 10;
+      }
+
+      @else {
+        // Move the decimal dot to the left
+        $divider: $divider * 10;
+        $number: $number / $divider;
+      }
+
+      $result: $result + $number;
+    }
+  }
+
+  @return if($minus, $result * -1, $result);
+}
+h1 {
+  text-align: center;
+}
+// animation
+@keyframes tick-tock {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes tick-tock {
+  to {
+    transform: rotate(360deg) translate3d(0, 0, 0);
+  }
+}
+$hour: number(current-time('%H'));
+$min: number(current-time('%M'));
+$sec: number(current-time('%S'));
+.clock {
+  position: relative;
+  margin: 0 auto;
+  width: 933px;
+  height: 622px;
+  .panel {
+    list-style: none;
+    position: absolute;
+    left: 50%;
+    i{
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      text-align: center;
+      font-style: normal;
+      line-height: 18px;
+      &:before{
+        content: "|";
+      }
+    }
+    li {
+      &:nth-child(15n) {
+        i {
+          &:before {
+            content: attr(data-num);
+          }
+        }
+      }
+    }
+    // set rotate and translate
+    // default graduate is 16px
+    @for $i from 1 through 60 {
+      $r:18*14;
+      $reg:pi()/30*$i;
+      i[index="#{$i}"] {
+        top: ($r - $r*cos($reg))*1px;
+        left: $r*sin($reg)*1px;
+        transform:rotate(6deg*$i);
+        @if $i == 15 {
+          transform:rotate(0deg);
+        } @else if $i == 30 {
+          transform:rotate(0deg);
+        } @else if $i == 45 {
+          transform: rotate(0deg);
+        } @else if $i == 60 {
+          transform: rotate(0deg);
+        }
+
+      }
+    }
+  }
+  .pointer {
+    position: absolute;
+    top: 262px;
+    left: 50%;
+    &:before {
+      content: ".";
+      font-size: 16px;
+      color: red;
+    }
+    > div {
+      position: absolute;
+      height: 2px;
+      &:before {
+        position: absolute;
+        right: 0;
+        content: " ";
+        width: 50%;
+        height: 100%;
+      }
+    }
+    #hour {
+      margin-left: -72px;
+      width: 144px;
+      transform: rotate(($hour%12*30-90)*1deg);
+      -webkit-animation: tick-tock 216000s steps(60, end) infinite;
+      animation: tick-tock 216000s steps(60, end) infinite;
+      &:before {
+        background: #000;
+      }
+    }
+    #min {
+      margin-left: -144px;
+      width: 288px;
+      transform: rotate(($min*6-90)*1deg);
+      -webkit-animation: tick-tock 3600s steps(60, end) infinite;
+      animation: tick-tock 3600s steps(60, end) infinite;
+      &:before {
+        background: #ccc;
+      }
+    }
+    #sec {
+      margin-left: -216px;
+      width: 432px;
+      transform: rotate(($sec*6-90)*1deg);
+      -webkit-animation: tick-tock 60s steps(60, end) infinite;
+      animation: tick-tock 60s steps(60, end) infinite;
+      &:before {
+        background: red;
+      }
+    }
+  }
+}
+
+#c-panel, #c-pointer {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#c-panel {
+  z-index: 10;
+}
+#c-pointer {
+  z-index: 1000;
+}

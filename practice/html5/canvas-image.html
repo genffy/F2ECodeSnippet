@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>canvas图片放大镜</title>
+</head>
+<body>
+    <div style="width: 300px;margin: 0 auto;text-align: center;">
+        <form name="actionWay" action="">
+            <label for="zoomWay-1">滚轮<input id="zoomWay-1" name="zoomWay" type="radio" value="wheel" checked/></label>
+            <label for="zoomWay-2">放大镜<input id="zoomWay-2" name="zoomWay" type="radio" value="mirror"/></label>
+            <label for="zoomWay-3">拾色器<input id="zoomWay-3" name="zoomWay" type="radio" value="color"/></label>
+        </form>
+        <button onclick="reset()">reset</button>
+        <input type="text" id="color-picker"/><button data-clipboard-target="color-picker" data-clipboard-text="Copy me!" id="picker">复制</button>
+    </div>
+    <canvas id="image" style="display: block;border: 1px solid #ccc;margin: 0 auto;">sorry,not support canvas.</canvas>
+    <input id="image-resize" type="range" value="1.0" min="0.3" max="3.0" step="0.1" style="display:block;border: none;background: #fff;border-radius: 3px;width: 600px;margin: 10px auto;"/>
+    <canvas id="image-zoom" style="display:none;border:none;background:transparent;position: absolute;">sorry,not support canvas.</canvas>
+</body>
+<script src="./libs/zeroclipboard/ZeroClipboard.min.js"></script>
+<script>
+    var imageCan = document.getElementById("image");
+    var imageCtn = imageCan.getContext("2d");
+    var dragBar = document.getElementById("image-resize");
+
+    var imageZoomCan = document.getElementById("image-zoom");
+    var imageZoomCtn = imageZoomCan.getContext("2d");
+
+    var image = new Image();
+    var imgBox = {};
+
+    var wheelCount = 0;
+
+    var colorText = document.getElementById("color-picker");
+
+    var zoomWay = function(){
+        return document.forms.actionWay.zoomWay.value || "wheel";
+    };
+    window.onload = function () {
+        // set ZeroClipboard.config( { swfPath: "http://YOURSERVER/path/ZeroClipboard.swf" } );
+        ZeroClipboard.config({swfPath: "./libs/zeroclipboard/ZeroClipboard.swf"});
+        // 设置剪切板
+        var client = new ZeroClipboard(document.getElementById("picker"));
+        client.on("ready", function() {
+            console.log("Flash movie loaded and ready.");
+            this.on("aftercopy", function(event) {
+                console.log("Copied text to clipboard: " + event.data["text/plain"]);
+            });
+        });
+
+        imageCan.width = 933;
+        imageCan.height = 622;
+
+        imgBox = imageCan.getBoundingClientRect();
+
+        // 放大镜的初始化
+        imageZoomCan.height = 160;
+        imageZoomCan.width = 160;
+
+        image.src = "./images/img02.jpg";
+        image.onload = function () {
+            imageCtn.drawImage(image, 0, 0);
+        };
+
+
+        // range event
+        dragBar.onmousemove = function (e) {
+            e.preventDefault();
+            var value = dragBar.value;
+            getZoomImage(value);
+        };
+
+
+
+        imageCan.onmousemove = function(e){
+            var _zoomWay = zoomWay();
+            if(_zoomWay != "color" && _zoomWay != "mirror"){
+                return false;
+            }
+            e.preventDefault();
+            var target = e.target;
+            var mousePos = {
+                x:0,
+                y:0
+            };
+            if(target != imageCan){
+                return false;
+            }
+            // get mouser position related to image canvas
+            if(imgBox){
+                mousePos.y = e.clientY - imgBox.top;
+                mousePos.x = e.clientX - imgBox.left;
+            }
+            imageZoomCtn.beginPath();
+            imageZoomCtn.arc( 80, 80, 80, 0, 2*Math.PI);
+            imageZoomCtn.clip();
+            // 放大镜
+            if(_zoomWay == "mirror"){
+                imageZoomCtn.drawImage(image, mousePos.x, mousePos.y, 80, 80,  0, 0, imageZoomCan.width, imageZoomCan.height);
+                // 拾色器
+            }else if(_zoomWay == "color"){
+                var imageData = imageCtn.getImageData(mousePos.x, mousePos.y, 1, 1);
+                var _tempCan = document.createElement("canvas");
+                var _tempCtn = _tempCan.getContext("2d");
+                _tempCan.width = 1;
+                _tempCan.height = 1;
+                _tempCtn.putImageData(imageData, 0, 0);
+                imageZoomCtn.save();
+                imageZoomCtn.scale(imageZoomCan.width, imageZoomCan.height);
+                imageZoomCtn.drawImage(_tempCan, 0, 0);
+                _tempCtn = null;
+                imageZoomCtn.restore();
+                // 显示值在面板上&copy值到粘贴板
+                //imageZoomCtn.font="12px Georgia";
+                //imageZoomCtn.fillText("rgba("+imageData.data[0]+","+imageData.data[1]+","+imageData.data[2]+","+imageData.data[3]+")", 0, imageZoomCan.height/2);
+                colorText.value = "rgba("+imageData.data[0]+","+imageData.data[1]+","+imageData.data[2]+","+imageData.data[3]+")";
+            }
+            imageZoomCan.style.top = e.clientY + 10 + "px";
+            imageZoomCan.style.left = e.clientX - imageZoomCan.width + 10 + "px";
+            imageZoomCan.style.display = "block";
+        };
+
+        imageCan.onmouseout = function(){
+            imageZoomCtn.clearRect(0, 0, imageZoomCan.width, imageZoomCan.height);
+            imageZoomCan.style.display = "none";
+        }
+    };
+
+    // on mouse wheel scroll
+    window.onmousewheel = function(e){
+        if(zoomWay() != "wheel"){
+            return false;
+        }
+        var target = e.target;
+        var mousePos = {
+            x:0,
+            y:0
+        };
+        if(target != imageCan){
+           return false;
+        }
+        // get mouser position related to image canvas
+        if(imgBox){
+            mousePos.y = e.clientY - imgBox.top;
+            mousePos.x = e.clientX - imgBox.left;
+        }
+        // mouse up -> size up
+        // mouse down -> size down
+        if(e.wheelDelta > 0){
+            wheelCount++;
+        }else{
+            wheelCount--;
+        }
+        if(wheelCount < -10 || wheelCount > 100){
+            return false;
+        }
+        var zoom  = 1 + 0.1 * wheelCount;
+        getZoomImage(zoom, mousePos);
+    };
+
+    // zoom up watch detail
+
+
+    // get zoom
+    function getZoomImage(zoom, position){
+        if(!position){
+            position = {
+                x: imageCan.width / 2,
+                y: imageCan.height / 2
+            };
+        }
+        var sWidth = parseInt(imageCan.width / zoom);
+        var sX = position.x - sWidth/2;
+
+        var sHeight = parseInt(imageCan.height / zoom);
+        var sY = position.y - sHeight/2;
+        // clear
+        imageCtn.clearRect(0, 0, imageCan.width, imageCan.height);
+        imageCtn.drawImage(image, sX, sY, sWidth, sHeight, 0, 0, imageCan.width, imageCan.height);
+    }
+    // reset
+    function reset(){
+        dragBar.value = 1.0;
+        imageCtn.drawImage(image, 0, 0, imageCan.width, imageCan.height);
+    }
+
+
+</script>
+</html>
