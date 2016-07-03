@@ -1,1 +1,1 @@
-// source url: http://documentup.com/kriskowal/q/
+// source url: https://github.com/kriskowal/q

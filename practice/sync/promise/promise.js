@@ -17,6 +17,10 @@
  *
  */
 
+
+/**
+ * 一些关于promise的小实验
+ */
 setTimeout(function () {
     console.log('three');
 }, 0);
@@ -27,11 +31,8 @@ Promise.resolve().then(function () {
 
 console.log('one');
 
-// polyfill
-
-
 /**
- * 关于 Promise 的一些早期实现
- * Q when WinJS RSVP.js
- * @/// <reference path="http://www.html5rocks.com/zh/tutorials/es6/promises/" />
+ * some best practice
+ * TODO
  */
+
