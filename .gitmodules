@@ -1,0 +1,3 @@
+[submodule "git-submodules-action"]
+	path = practice/git/submodules
+	url = git@git.coding.net:genffy/git-submodules-action.git
