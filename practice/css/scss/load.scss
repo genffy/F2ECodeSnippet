@@ -1,31 +1,23 @@
 @import "base";
+$color0: #24ffff;
+$color1: #181636;
+$color2: #ed3d20;
+$color3: #fa8700;
 @keyframes load_animation {
+  0% {
+    background-color: $color0;
+  }
   25% {
-      background-color: #181636;
+    background-color: $color1;
   }
   50% {
-      background-color: #fa8700;
+    background-color: $color3;
   }
   75% {
-      background-color: #ed3d20;
+    background-color: $color2;
   }
   100% {
-      background-color: #24ffff;
-  }
-}
-
-@keyframes move {
-  25% {
-    transform: translate(50px, 0);
-  }
-  50% {
-    transform: translate(50px, 50px);
-  }
-  75% {
-    transform: translate(0, 50px);
-  }
-  100% {
-    transform: translate(0, 0);
+    background-color: $color0;
   }
 }
 body {
@@ -38,43 +30,51 @@ body {
   width: 100px;
   height: 100px;
   .square {
+    float: left;
     height: 50%;
     width: 50%;
-    float: left;
     box-sizing: border-box;
-    outline: #fff;
-    &.square_0 {
-      background-color: #24ffff;
+    background-color: currentColor;
+    &.s0 {
+      color: $color0;
     }
-    &.square_1 {
-      background-color: #181636;
+    &.s1 {
+      color: $color1;
     }
-    &.square_2 {
-      background-color: #fa8700;
+    &.s2 {
+      color: $color2;
     }
-    &.square_3 {
-      background-color: #ed3d20;
+    &.s3 {
+      color: $color3;
+    }
+    &:before {
+      position: absolute;
+      content: " ";
+      right: -100px;
+      top: 0;
+      width: 100px;
+      height: 100px;
+      display: none;
+      z-index: 1000;
     }
   }
-  &:hover {
-    .result {
-    }
+}
+.result {
+  position: absolute;
+  content: " ";
+  right: -100px;
+  top: 0;
+  width: 100px;
+  height: 100px;
+  animation: load_animation 4s ease infinite;
+}
+.square:hover {
+  cursor: pointer;
+  &:before {
+    display: block;
+    background-color: currentColor;
   }
-  .result {
-     position: absolute;
-     right: -100px;
-     top: 0;
-     height: 100px;
-     width: 100px;
-     background-color: #24ffff;
-     animation:
-             move 3s ease infinite alternate ,
-             load_animation 3s ease infinite alternate ;
-  }
-
-  &:hover {
-    .result {
-      animation-play-state: paused;
-    }
+  & ~ .result {
+    animation-play-state: paused;
   }
 }
