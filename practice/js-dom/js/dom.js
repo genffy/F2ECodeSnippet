@@ -1,11 +1,6 @@
 /**
  * Created by genffy on 16/7/14.
  */
-function classList(e) {
-    if(e.classList) return e.classList;
-    else return new CSSClassList(e);
-}
-
 class CSSClassList{
     constructor(e) {
         this.e = e
@@ -70,7 +65,6 @@ class CSSClassList{
     toString(){
         return this.e.className
     }
-
     /**
      * 转换为 class name array
      * @returns {*|Array}
@@ -78,4 +72,9 @@ class CSSClassList{
     toArray(){
         return this.e.className.match(/\b\w+\b/g) || []
     }
+}
+
+export default function classList(e) {
+    if(e.classList) return e.classList;
+    else return new CSSClassList(e);
 }
