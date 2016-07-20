@@ -69,3 +69,19 @@ export function isNum(num) {
 export function int(a) {
     return parseInt(a, 10);
 }
+
+export function findInArray(array, callback) {
+    for (let i = 0, length = array.length; i < length; i++) {
+        if (callback.apply(callback, [array[i], i, array])) return array[i];
+    }
+}
+
+export function getTouch(e, identifier) {
+    return (e.targetTouches && findInArray(e.targetTouches, t => identifier === t.identifier)) ||
+        (e.changedTouches && findInArray(e.changedTouches, t => identifier === t.identifier));
+}
+
+export function getTouchIdentifier(e) {
+    if (e.targetTouches && e.targetTouches[0]) return e.targetTouches[0].identifier;
+    if (e.changedTouches && e.changedTouches[0]) return e.changedTouches[0].identifier;
+}

@@ -6,11 +6,10 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: {
-        basic: "./src/basic/app.js",
-        react: "./src/react/app.js",
-        // ng: "./src/angular/app.js",
-        ng2: "./src/angular2/app.ts",
-        vue: "./src/vue/app.js"
+        vanilla: "./resource/vanilla/imgview.js",
+        react: "./resource/react/imgview.js",
+        // ng2: "./resource/angular2/app.ts",
+        // vue: "./resource/vue/app.js"
     },
     output: {
         filename: "[name].bundle.js",
@@ -25,26 +24,37 @@ module.exports = {
     module: {
         loaders: [
             {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                include: path.join(__dirname, 'resource')
+            },
+            {
                 test: /\.jsx?/,
-                loader: 'babel',
+                loader: 'babel-loader',
                 query: {
                     presets:  ["react", "es2015", "stage-0", "react-hmre"]
                 },
-                include: path.join(__dirname, 'src')
+                include: path.join(__dirname, 'resource')
             },
+            // {
+            //     test: /\.css/,
+            //     include: path.join(__dirname, 'resource'),
+            //     loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+            // },
             {
-                test: /\.css/,
-                include: path.join(__dirname, 'src'),
-                loader: 'style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
+                test: /\.scss$/,
+                loaders: ["style", "css", "sass"]
             },
             {
                 test: /\.vue$/,
-                loader: 'vue'
+                loader: 'vue',
+                include: path.join(__dirname, 'resource')
             },
             {
                 test: /\.ts$/,
                 // loader: 'ts-loader'
-                loader: 'awesome-typescript-loader'
+                loader: 'awesome-typescript-loader',
+                include: path.join(__dirname, 'resource')
             }
         ]
     }
