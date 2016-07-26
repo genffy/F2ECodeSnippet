@@ -5,6 +5,7 @@
 import React,{PropTypes} from 'react';
 import ReactDom from 'react-dom';
 import Draggable from './draggable'
+import Modal from './modal'
 import Styles from '../scss/imageview.scss';
 
 export default class ImageView extends React.Component{
@@ -178,7 +179,7 @@ export default class ImageView extends React.Component{
     render() {
         let {file} = this.props;
         return (
-            <div id={this.props.id} isClose={true} isMask={true} title={file.name ||''}  {...this.props}>
+            <Modal id={this.props.id} isClose={true} isMask={true} title={file.name ||''}  {...this.props}>
                 <div>
                     <div className={"img-wrap "+ (this.props.overflow? 'img-wrap-hidden':'img-wrap-show')}
                          style={{
@@ -207,7 +208,7 @@ export default class ImageView extends React.Component{
                         <div onClick={::this.cssEnhance.bind(this,'min')} className="upload-icon" name="remove" alt="缩小"></div>
                     </div>
                 </div>
-            </div>
+            </Modal>
         );
     }
 }

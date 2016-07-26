@@ -6,8 +6,9 @@ var webpack = require('webpack');
 
 module.exports = {
     entry: {
-        vanilla: "./resource/vanilla/imgview.js",
-        react: "./resource/react/imgview.js",
+        // vanilla: "./resource/vanilla/imgview.js",
+        react: "./resource/react/imgview.jsx",
+        demo: "./example/index.jsx",
         // ng2: "./resource/angular2/app.ts",
         // vue: "./resource/vue/app.js"
     },
@@ -19,22 +20,25 @@ module.exports = {
     },
     devtool: 'cheap-module-eval-source-map',
     resolve: {
-        extensions: ['', '.ts', '.webpack.js', '.web.js', '.js']
+        extensions: ['', '.js', '.jsx', '.ts']
     },
     module: {
         loaders: [
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
+                exclude: /node_modules/,
                 include: path.join(__dirname, 'resource')
             },
             {
-                test: /\.jsx?/,
-                loader: 'babel-loader',
+                test: /\.jsx?$/,
+                loaders: ['react-hot', 'babel-loader?presets[]=react,presets[]=es2015'],
+                /*loader: 'babel-loader',
                 query: {
                     presets:  ["react", "es2015", "stage-0", "react-hmre"]
-                },
-                include: path.join(__dirname, 'resource')
+                },*/
+                exclude: /node_modules/,
+                // include: path.join(__dirname, 'resource')
             },
             // {
             //     test: /\.css/,
@@ -43,16 +47,19 @@ module.exports = {
             // },
             {
                 test: /\.scss$/,
+                exclude: /node_modules/,
                 loaders: ["style", "css", "sass"]
             },
             {
                 test: /\.vue$/,
                 loader: 'vue',
+                exclude: /node_modules/,
                 include: path.join(__dirname, 'resource')
             },
             {
                 test: /\.ts$/,
                 // loader: 'ts-loader'
+                exclude: /node_modules/,
                 loader: 'awesome-typescript-loader',
                 include: path.join(__dirname, 'resource')
             }
