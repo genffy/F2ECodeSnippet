@@ -10,11 +10,12 @@ import Styles from '../scss/imageview.scss';
 
 export default class ImageView extends React.Component{
     static propTypes = {
-        classPrefix:PropTypes.string,
-        componentTag:PropTypes.string
+        classPrefix: PropTypes.string,
+        componentTag: PropTypes.string
     };
 
     static defaultProps = {
+        classPrefix: 'iv_',
         componentTag:'div',
         file:{
             name:'',
@@ -203,9 +204,9 @@ export default class ImageView extends React.Component{
                         </Draggable>
                     </div>
                     <div className="icon-box">
-                        <div onClick={::this.cssEnhance.bind(this,'rotate')} className="upload-icon" name="radio_unchecked" alt="旋转"></div>
-                        <div onClick={::this.cssEnhance.bind(this,'max')} className="upload-icon"  name="add" alt="放大"></div>
-                        <div onClick={::this.cssEnhance.bind(this,'min')} className="upload-icon" name="remove" alt="缩小"></div>
+                        <div onClick={this.cssEnhance.bind(this,'rotate')} className="upload-icon" name="radio_unchecked" alt="旋转"></div>
+                        <div onClick={this.cssEnhance.bind(this,'max')} className="upload-icon"  name="add" alt="放大"></div>
+                        <div onClick={this.cssEnhance.bind(this,'min')} className="upload-icon" name="remove" alt="缩小"></div>
                     </div>
                 </div>
             </Modal>

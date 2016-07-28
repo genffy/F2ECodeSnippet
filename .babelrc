@@ -6,6 +6,7 @@
   ],
   "plugins":[
     "transform-decorators-legacy",
-    "transform-decorators"
+    "transform-decorators",
+    "transform-class-properties"
   ]
  }

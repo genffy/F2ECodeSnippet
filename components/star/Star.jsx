@@ -1,9 +1,9 @@
 /**
  * 评分打星
  */
-import './Star.less'
+import './Star.scss'
 import React, {Component, PropTypes} from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
 
 const loop = function(){};
 const levelItem = PropTypes.shape({
@@ -50,20 +50,33 @@ export default class Star extends Component {
         /**
          * 评分等级
          */
-        level: PropTypes.number.isRequired
+        score: PropTypes.number,
+        /**
+         * 打分的回调
+         */
+        callback: PropTypes.func
     };
 
     static defaultProps = {
         readonly: false,
         levels: levels,
-        level: 20
+        score: 20,
+        callback: loop
     };
 
     constructor(props, context) {
         super(props, context);
+        // 计算
         this.state = {
-            // TODO
-        }
+            score: this.props.score
+        };
+        this.levelMax = this.props.levels.length-1;
+
+        this.touchStarted = false; // detect if a touch event is sarted
+        this.currX = 0;
+        this.currY = 0;
+        this.cachedX = 0;
+        this.cachedY = 0;
     }
 
     componentWillMount() {
@@ -73,8 +86,10 @@ export default class Star extends Component {
 
     }
 
-    componentWillReceiveProps() {
-
+    componentWillReceiveProps(nextProps) {
+        this.state = {
+            score: nextProps.score
+        }
     }
     getThisPosition(){
         const node = ReactDOM.findDOMNode(this);
@@ -86,26 +101,32 @@ export default class Star extends Component {
      * @param evt
      */
     handlerTap(evt){
+        const self = this;
         evt.preventDefault();
-        var pointer = this.getPointerEvent(evt);
+        const pointer = self.getPointerEvent(evt);
         // caching the current x
-        cachedX = currX = pointer.pageX;
+        self.cachedX = self.currX = pointer.pageX;
         // caching the current y
-        cachedY = currY = pointer.pageY;
+        self.cachedY = self.currY = pointer.pageY;
         // a touch event is detected
-        touchStarted = true;
-        $touchArea.text('Touchstarted');
+        self.touchStarted = true;
         // detecting if after 200ms the finger is still in the same position
         setTimeout(function (){
-            if ((cachedX === currX) && !touchStarted && (cachedY === currY)) {
+            if ((self.cachedX === self.currX) && !self.touchStarted && (self.cachedY === self.currY)) {
                 // Here you get the Tap event
                 // 计算距离
-                const nodePos = this.getThisPosition()
-                console.log(nodePos)
+                const nodePos = self.getThisPosition();
+                const disX = self.currX - nodePos.left;
+                self.getLevel(disX);
             }
         },200);
         // bind move
+    }
 
+    handlerEnd(evt) {
+        evt.preventDefault();
+        const self = this;
+        self.touchStarted = false;
     }
 
     onMouseDownHandler(evt) {
@@ -115,36 +136,63 @@ export default class Star extends Component {
         this.handlerTap(evt)
     }
     onMouseUpHandler(evt) {
-        console.log(evt)
+        this.handlerEnd(evt)
     }
     onTouchEndHandler(evt) {
-        console.log(evt)
+        this.handlerEnd(evt)
     }
     onMouseMoveHandler(evt) {
-        console.log(evt)
     }
-    getStyles() {
+    getValue() {
         // 根据 distance 计算背景的位置
+        let {score, level} = this.state
+        if(level == undefined){
+            this.props.levels.map((item, index)=>{
+                if(score == item.value){
+                    level = index
+                }
+            });
+        }
+
+        const width = (level+1)*27;
         return {
-            'width': '50%'
+            'level': this.props.levels[(level>this.levelMax ? this.levelMax : level)],
+            'width': `${width}px`
         }
     }
+    getLevel(val){
+        const num = Math.ceil(val/24)-1;
+        const levelObj = this.props.levels[(num>this.levelMax ? this.levelMax : num)]
+        this.setState({
+            level: num
+        });
+        this.props.callback(levelObj.value, levelObj);
+    }
     getPointerEvent(evt) {
-        return evt.originalEvent.targetTouches ?
-            evt.originalEvent.targetTouches[0] : evt;
+        return evt.targetTouches ?
+            evt.targetTouches[0] : evt;
     }
     render() {
         const {levels, readonly} = this.props;
-        const styles = this.getStyles()
+        const {width, level} = this.getValue();
         return (
             <div className="q-star-wrap">
-                <div className="q-star"
-                     style={styles}
-                     onMouseDown={::this.onMouseDownHandler}
-                     onTouchStart={::this.onTouchStartHandler}
-                     onMouseUp={::this.onMouseUpHandler}
-                     onTouchEnd={::this.onTouchEndHandler}><div className="q-star-gray"></div></div>
-                <p className="q-star-desc">满意</p>
+                {
+                    readonly?(
+                        <div className="q-star">
+                            <div className="q-star-gray" style={{width: width}}></div>
+                        </div>
+                    ):(
+                        <div className="q-star"
+                             onMouseDown={this.onMouseDownHandler.bind(this)}
+                             onTouchStart={this.onTouchStartHandler.bind(this)}
+                             onMouseUp={this.onMouseUpHandler.bind(this)}
+                             onTouchEnd={this.onTouchEndHandler.bind(this)}>
+                            <div className="q-star-gray" style={{width: width}}></div></div>
+                    )
+                }
+
+                <p className="q-star-desc">{level.desc}</p>
             </div>
         );
     }

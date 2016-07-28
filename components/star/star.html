@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html , body {
+            height: 100%;
+        }
+        body {
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-flow: column;
+        }
+        .main {
+            width: 25%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h1>没事打个分</h1>
+        <div id="star"></div>
+    </div>
+    <!--
+    webpack-dev-server --port 8081 --hot --inline --config webpack.config.js --content-base example/
+    -->
+    <script src="bundle.js"></script>
+</body>
+</html>
