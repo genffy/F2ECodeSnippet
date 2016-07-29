@@ -59,7 +59,7 @@ const files = [
     }
 ];
 
-ReactDom(
+ReactDom.render(
     <Demo files={files}></Demo>,
     document.getElementById('img_view')
 )

@@ -1,7 +1,3 @@
-/**
- * Created by genffy on 16/7/20.
- */
-
 export function addEvent(el, event, handler) {
     if (!el) { return; }
     if (el.attachEvent) {

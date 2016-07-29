@@ -7,5 +7,5 @@
 
 ```bash
 #run demo     
-webpack-dev-server --port 8081 --hot --inline --config webpack.config.js --content-base example/ 
+webpack-dev-server --port 8081 --hot --inline --config webpack.config.js --content-base ./example 
 ```

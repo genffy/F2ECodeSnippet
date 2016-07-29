@@ -26,19 +26,17 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/,
-                include: path.join(__dirname, 'resource')
+                loader: 'babel-loader?presets[]=es2015,presets[]=stage-0',
+                exclude: /node_modules/
             },
             {
-                test: /\.jsx?$/,
-                loaders: ['react-hot', 'babel-loader?presets[]=react,presets[]=es2015'],
+                test: /\.jsx$/,
+                loaders: ['react-hot', 'babel-loader?presets[]=react,presets[]=es2015,presets[]=stage-0'],
                 /*loader: 'babel-loader',
                 query: {
                     presets:  ["react", "es2015", "stage-0", "react-hmre"]
                 },*/
-                exclude: /node_modules/,
-                // include: path.join(__dirname, 'resource')
+                exclude: /node_modules/
             },
             // {
             //     test: /\.css/,
