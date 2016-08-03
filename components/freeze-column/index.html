@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>forzen-colunm</title>
     <link rel="stylesheet" href="./scss/freeze.css">
+    <style>
+        #freeze-grid {
+            margin: 0 auto;
+            width: 1000px;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -388,18 +394,23 @@
         });
         $scrollableContent.addEventListener('scroll', function(evt){
             console.log(evt.target);
+            var scrollHeight = $scrollableContent.getElementsByTagName('table')[0].scrollHeight,
+                    scrollLeft = $scrollableContent.getElementsByTagName('table')[0].scrollLeft;
+//            $scrollableContent.getElementsByTagName('table')[0].scrollTop = scrollHeight;
+            $freezeContent.scrollTop = scrollHeight;
+            $scrollableHeader.scrollLeft = scrollLeft;
         });
 
 
         var MOUSE_OVER = false;
-        window.addEventListener('mousewheel', function(evt){
+        /*window.addEventListener('mousewheel', function(evt){
             console.log(evt);
             if(MOUSE_OVER){
                 if(evt.preventDefault) { evt.preventDefault(); }
                 evt.returnValue = false;
                 return false;
             }
-        }, false);
+        }, false);*/
 
         $freezeContent.addEventListener('mouseenter', function(evt){
             MOUSE_OVER=true;
@@ -414,10 +425,14 @@
             var delta = evt.wheelDelta;
             if(delta > 0){
                 //go up
+
             }
             else{
                 //go down
             }
+            var scrollHeight = $freezeContent.getElementsByTagName('table')[0].scrollHeight;
+            $scrollableContent.scrollTop = scrollHeight;
+            $freezeContent.scrollTop = scrollHeight;
         }, false);
     }
 </script>
