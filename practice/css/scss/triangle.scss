@@ -1,0 +1,149 @@
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+
+  border-bottom: 5px solid black;
+}
+
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+
+  border-top: 20px solid #f00;
+}
+
+.arrow-right {
+  width: 0;
+  height: 0;
+  border-top: 60px solid transparent;
+  border-bottom: 60px solid transparent;
+
+  border-left: 60px solid green;
+}
+
+.arrow-left {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+
+  border-right:10px solid blue;
+}
+
+// how triangle made
+@import url(http://fonts.googleapis.com/css?family=Andika);
+
+$stepTiming: 0.8s 0.2s;
+
+.triangle-demo {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  background: tan;
+  border-top: 0 solid #EE7C31;
+  border-left: 0 solid #F5D97B;
+  border-bottom: 0 solid #D94948;
+  border-right: 0 solid #8DB434;
+  transition: $stepTiming;
+
+  .step-1 & {
+    border-top-width: 10px;
+  }
+  .step-2 & {
+    border-left-width: 10px;
+  }
+  .step-3 & {
+    border-right-width: 10px;
+  }
+  .step-4 & {
+    border-bottom-width: 10px;
+  }
+  .step-6 & {
+    background: transparent;
+  }
+  .step-7 & {
+    width: 0; height: 0;
+  }
+  .step-8 & {
+    border-left-color: transparent;
+  }
+  .step-9 & {
+    border-right-color: transparent;
+  }
+  .step-10 & {
+    border-top-color: transparent;
+  }
+}
+
+.triangle-title {
+  width: 300px;
+  padding: 1rem;
+  color: white;
+  background: #D94948;
+  border-radius: 20px;
+  margin: auto;
+  opacity: 0;
+  transition: $stepTiming;
+  .step-11 & {
+    opacity: 1;
+  }
+}
+
+body {
+  background: #333;
+  font-family: 'Andika', sans-serif;
+  color: white;
+  text-align: center;
+  font-size: large;
+  transform: translateZ(0);
+}
+
+.steps {
+  position: relative;
+  height: 45px;
+  > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    background: #333;
+    transition: 0.3s;
+  }
+  .step-0 {
+    opacity: 1;
+  }
+  .step-1 & .step-1 {
+    opacity: 1;
+  }
+  .step-2 & .step-2 {
+    opacity: 1;
+  }
+  .step-5 & .step-5 {
+    opacity: 1;
+  }
+  .step-6 & .step-6 {
+    opacity: 1;
+  }
+  .step-7 & .step-7 {
+    opacity: 1;
+  }
+  .step-8 & .step-8 {
+    opacity: 1;
+  }
+  .step-11 & .step-11 {
+    opacity: 1;
+  }
+}
+
+h1 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1.5rem;
+  border-bottom: 1px solid #555;
+  color: #999;
+}
