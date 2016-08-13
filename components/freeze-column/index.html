@@ -373,68 +373,11 @@
         </div>
     </div>
 </div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
-    window.onload = init();
+    $(function(){
 
-
-    function init(){
-        var $wrap = document.getElementById('freeze-grid'),
-            $freezeHeader = $wrap.getElementsByClassName('f-grid-header-locked')[0],
-            $scrollableHeader = $wrap.getElementsByClassName('f-grid-header-wrap')[0],
-            $freezeContent = $wrap.getElementsByClassName('f-grid-content-locked')[0],
-            $scrollableContent = $wrap.getElementsByClassName('f-grid-content')[0];
-
-        // 添加事件
-        $scrollableHeader.addEventListener('scroll', function(evt){
-            console.log(evt.target);
-        });
-        // not fire
-        $freezeContent.addEventListener('scroll', function(evt){
-            console.log(evt.target);
-        });
-        $scrollableContent.addEventListener('scroll', function(evt){
-            console.log(evt.target);
-            var scrollHeight = $scrollableContent.getElementsByTagName('table')[0].scrollHeight,
-                    scrollLeft = $scrollableContent.getElementsByTagName('table')[0].scrollLeft;
-//            $scrollableContent.getElementsByTagName('table')[0].scrollTop = scrollHeight;
-            $freezeContent.scrollTop = scrollHeight;
-            $scrollableHeader.scrollLeft = scrollLeft;
-        });
-
-
-        var MOUSE_OVER = false;
-        /*window.addEventListener('mousewheel', function(evt){
-            console.log(evt);
-            if(MOUSE_OVER){
-                if(evt.preventDefault) { evt.preventDefault(); }
-                evt.returnValue = false;
-                return false;
-            }
-        }, false);*/
-
-        $freezeContent.addEventListener('mouseenter', function(evt){
-            MOUSE_OVER=true;
-            console.log(evt);
-        }, false);
-        $freezeContent.addEventListener('mouseleave', function(evt){
-            MOUSE_OVER=false;
-            console.log(evt);
-        }, false);
-        $freezeContent.addEventListener('mousewheel', function(evt){
-            console.log(evt);
-            var delta = evt.wheelDelta;
-            if(delta > 0){
-                //go up
-
-            }
-            else{
-                //go down
-            }
-            var scrollHeight = $freezeContent.getElementsByTagName('table')[0].scrollHeight;
-            $scrollableContent.scrollTop = scrollHeight;
-            $freezeContent.scrollTop = scrollHeight;
-        }, false);
-    }
+    });
 </script>
 </body>
 </html>
