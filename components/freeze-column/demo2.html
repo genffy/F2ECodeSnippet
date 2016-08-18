@@ -1,5 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>table fix</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedcolumns/3.2.2/css/fixedColumns.dataTables.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.1.2/css/fixedHeader.dataTables.css"/>
+    <style>
+        /* Ensure that the demo table scrolls */
+        th, td { white-space: nowrap; }
+        div.dataTables_wrapper {
+            width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
 <body>
 
 <div class="table_wrap">
@@ -649,9 +664,9 @@
     </table>
 </div>
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<!--<script src="datatables.js"></script>-->
-<script src="./DataTables-1.10.12/js/jquery.dataTables.js"></script>
-<script src="./FixedColumns-3.2.2/js/dataTables.fixedColumns.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.2.2/js/dataTables.fixedColumns.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.js"></script>
 <script>
     $(function(){
         var table = $('#example').DataTable( {
@@ -667,16 +682,3 @@
 </script>
 </body>
 </html>
-<head>
-    <meta charset="UTF-8">
-    <title>table fix</title>
-    <link rel="stylesheet" href="datatables.css">
-    <style>
-        /* Ensure that the demo table scrolls */
-        th, td { white-space: nowrap; }
-        div.dataTables_wrapper {
-            width: 500px;
-            margin: 0 auto;
-        }
-    </style>
-</head>
