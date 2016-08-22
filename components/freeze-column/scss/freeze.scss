@@ -1,110 +1,98 @@
-
-.f-grouping-header {
-  background-color: #3f51b5;
-  padding: .429em;
-  color: rgba(255,255,255,.5);
-}
-.f-grid {
-  table {
-    width: 100%;
-    margin: 0;
-    max-width: none;
-    border-collapse: separate;
+.table-fixed-column {
+  .table {
+    //width: 100%;
     border-spacing: 0;
-    empty-cells: show;
-    border-width: 0;
-    outline: 0;
-  }
-  td {
-    border-style: solid;
-    border-width: 0 0 0 1px;
-    padding: .4em .6em;
-    overflow: hidden;
-    line-height: 1.6em;
-    vertical-align: middle;
-    text-overflow: ellipsis;
-  }
-  tr {
-    td {
-      border-bottom-width: 1px;
-      border-style: solid;
+    border-collapse: collapse;
+    th, td {
+      padding: 8px 10px;
+      white-space: nowrap;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
     }
   }
-  th {
-    overflow: hidden;
-    border-style: solid;
-    border-width: 0 0 1px 1px;
-    padding: .5em .6em .4em .6em;
-    font-weight: 400;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    text-align: left;
-    vertical-align: bottom;
-  }
-
-  .f-grid-content table,
-  .f-grid-content-locked>table,
-  .f-grid-header table {
-    table-layout: fixed;
-  }
-
-  &.f-grid-lockedcolumns {
-    white-space: nowrap;
-  }
-
-  .f-grid-content-locked,
-  .f-grid-header-locked {
-    display: inline-block;
-    vertical-align: top;
-    overflow: hidden;
-    position: relative;
-    border-style: solid;
-    border-width: 0 1px 0 0;
-  }
-  .f-grid-content-locked+.f-grid-content,
-  .f-grid-header-locked+.f-grid-header-wrap {
-    display: inline-block;
-    vertical-align: top;
-    border-color: #e6e6e6;
-  }
-  .f-grid-header {
-    color: #444;
-    background-color: #fafafa;
-    border-bottom: 1px solid #e6e6e6;
-    .f-grid-header-locked {
-
-    }
-    .f-grid-header-wrap {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      border-style: solid;
-      border-width: 0 1px 0 0;
-      zoom: 1;
-      &.f-auto-scrollable {
-
+  .table-fixed-column-left-body-inner, .table-fixed-column-scroll-body{
+    .table {
+      >thead {
+        >tr {
+          height: 0;
+          >th {
+            border: 1px solid transparent;
+            height: 0;
+            padding-top:0;
+            padding-bottom:0;
+            div {
+              height:0;
+              overflow: hidden;
+            }
+          }
+        }
       }
     }
-
-
-
   }
-
-  .f-grid-content-locked {
-
-  }
-  .f-grid-content {
-    position: relative;
-    width: 100%;
-    overflow: auto;
-    overflow-x: auto;
-    overflow-y: scroll;
-    zoom: 1;
-    min-height: 0;
-    &.f-auto-scrollable {
-
+  // left fixed
+  .table-fixed-column-left-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1px;
+    table {
+      th, td {
+        //border-right: 0!important;
+      }
+    }
+    // 宽度 就是表格内容的宽度
+    .table-fixed-column-left-header {
+      background: #fff;
+      position: relative;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      table {
+        border-right:0;
+        border-bottom:0;
+      }
+    }
+    .table-fixed-column-left-body {
+      position: relative;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+      background: #fff;
+      .table-fixed-column-left-body-inner {
+        position: relative;
+        top: 0;
+        left: 0;
+        overflow-y: scroll;
+        padding-right: 20px;
+        box-sizing: border-box;
+        table {
+          border-right:0;
+          border-bottom:0;
+        }
+        /*此处有高宽*/
+        //宽度 比table-fixed-column-left-wrap 多一个滚动条的宽度
+      }
     }
   }
-
+  // scroll
+  .table-fixed-column-scroll {
+    .table-fixed-column-scroll-header {
+      overflow: hidden;
+      position: relative;
+      border: 0;
+      width: 100%;
+      .table-fixed-column-scroll-header-inner {
+        box-sizing: border-box;
+        padding-right: 20px;
+        // 这里的宽度和内容区域的宽度一样
+      }
+    }
+    .table-fixed-column-scroll-body {
+      position: relative;
+      overflow: auto;
+      width: 100%;
+      max-height: 400px;
+    }
+  }
 
 }

@@ -4,7 +4,7 @@
 var path = require('path');
 var webpack = require('webpack');
 module.exports = {
-    entry: './src/index.jsx',
+    entry: './demo/demo.jsx',
     output: {
         filename: "bundle.js",
         chunkFilename: "chunk.js",
@@ -40,4 +40,4 @@ module.exports = {
             }
         ]
     }
-}
+};
