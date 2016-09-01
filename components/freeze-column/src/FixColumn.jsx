@@ -52,15 +52,12 @@ export default class FixColumn extends Component {
      */
     gridSetUp(){
         let $dom = $(ReactDom.findDOMNode(this));
-        console.log($dom);
         this.dom.body = $dom[0];
         this.dom.scroller = $(".table-fixed-column-scroll-body", $dom)[0];
-        //
         this.dom.grid.wrapper = $(".table-fixed-column-scroll", $dom)[0];
         this.dom.grid.body = $(".table-fixed-column-scroll-body", $dom)[0];
         this.dom.grid.header = $(".table-fixed-column-scroll-header", $dom)[0];
         this.dom.grid.headerInner = $(".table-fixed-column-scroll-header-inner", $dom)[0];
-
         this.dom.grid.left.wrapper = $(".table-fixed-column-left-wrap", $dom)[0];
         this.dom.grid.left.header = $(".table-fixed-column-left-header", $dom)[0];
         this.dom.grid.left.body = $(".table-fixed-column-left-body", $dom)[0];
@@ -212,9 +209,6 @@ export default class FixColumn extends Component {
             });
         };
         setLayout();
-        /*setTimeout(function(){
-            setLayout();
-        },200);*/
     }
 
     _fnDTOverflow() {

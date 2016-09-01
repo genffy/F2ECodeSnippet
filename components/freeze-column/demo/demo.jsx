@@ -5,13 +5,12 @@ import FixColumn from '../src/index'
 class Demo extends Component {
     constructor(props){
         super(props);
-
     }
     render() {
      return (
          <div style={{maxWidth: "800px", margin: "20px auto", position: 'relative'}}>
              <FixColumn maxHeight={400} fixedColumn={2}>
-                 <table id="example" className="stripe row-border order-column" cellSpacing="0" width="100%">
+                 <table className="stripe row-border order-column" cellSpacing="0" width="100%">
                      <thead>
                      <tr>
                          <th><div>First name</div></th>
