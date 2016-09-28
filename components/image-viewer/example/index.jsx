@@ -3,21 +3,7 @@
  */
 import React from 'react'
 import ReactDom from 'react-dom'
-import ImageView from '../resource/react/imgview'
-
-class Demo extends React.Component {
-    constructor(props, context) {
-        super(props, context)
-        console.log(this.props.files)
-    }
-    render(){
-        return (
-            <div>
-                <ImageView file={this.props.files[0]}></ImageView>
-            </div>
-        )
-    }
-}
+import Modal from '../resource/react/modal'
 
 const files = [
     {
@@ -59,7 +45,35 @@ const files = [
     }
 ];
 
+class Demo extends  React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            file: {
+                id: 1,
+                url: './imgs/1.jpg',
+                name: 'aaa'
+            }
+        };
+        this.showModal = false
+    }
+    show() {
+        const file = files[parseInt(Math.random() * 20) % 10] || files[0];
+        this.setState({
+            file: file
+        });
+        this.showModal = true;
+    }
+    render(){
+        return (
+            <div>
+                <button onClick={::this.show}>点击我显示图片预览</button>
+                <Modal className="image-view-demo" is-show={this.showModal} file={this.state.file}/>
+            </div>
+        )
+    }
+}
 ReactDom.render(
-    <Demo files={files}></Demo>,
+    <Demo/>,
     document.getElementById('img_view')
 )

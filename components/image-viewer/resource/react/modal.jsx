@@ -7,6 +7,7 @@
  */
 import React, {Component} from 'react'
 import ReactDom from 'react-dom'
+import ImageView from './imgview'
 
 const loop = function(){};
 
@@ -14,13 +15,11 @@ class ModalTemplate extends Component {
     static defaultProps = {
         okCallback: loop,
         cancelCallback: loop,
-    }
+    };
 
     constructor(props, context){
         super(props, context)
-
-
-
+        this.modalId = 'modal_'+ ((Math.random() * 10000000).toFixed(0));
     }
     // event
     closeHandler(){
@@ -34,18 +33,17 @@ class ModalTemplate extends Component {
     }
 
     render(){
-        const {title} = this.props;
-
+        const {title, file} = this.props;
         return (
             <div className="modal-window">
                 <div className="modal-mask"></div>
-                <div className="modal-warp">
+                <div className="modal-wrap">
                     <div className="modal-header">
                         <span className="close" onClick={::this.closeHandler()}></span>
                         <h2>{title}</h2>
                     </div>
                     <div className="modal-body">
-
+                        <ImageView id={this.modalId} file={file}/>
                     </div>
                     <div className="modal-footer">
                         <button onClick={::this.okHandler()}>确认</button>
@@ -76,9 +74,7 @@ export default class Modal extends Component {
         document.body.removeChild(this.portalElement);
     }
     componentDidUpdate() {
-        ReactDom.render(
-            <ModalTemplate {...this.props}>{this.props.children}</ModalTemplate>,
-            this.portalElement);
+        ReactDom.render(<ModalTemplate {...this.props}>{this.props.children}</ModalTemplate>, this.portalElement);
     }
     render() {
         return null

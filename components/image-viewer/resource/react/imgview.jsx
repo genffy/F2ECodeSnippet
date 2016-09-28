@@ -5,7 +5,6 @@
 import React,{PropTypes} from 'react';
 import ReactDom from 'react-dom';
 import Draggable from './draggable'
-import Modal from './modal'
 import Styles from '../scss/imageview.scss';
 
 export default class ImageView extends React.Component{
@@ -21,7 +20,7 @@ export default class ImageView extends React.Component{
             name:'',
             url:''
         },
-        id:'',
+        id:''
     };
 
     constructor(props,context){
@@ -180,36 +179,34 @@ export default class ImageView extends React.Component{
     render() {
         let {file} = this.props;
         return (
-            <Modal id={this.props.id} isClose={true} isMask={true} title={file.name ||''}  {...this.props}>
-                <div>
-                    <div className={"img-wrap "+ (this.props.overflow? 'img-wrap-hidden':'img-wrap-show')}
-                         style={{
-                            height: this.state.imgWrap.height,
-                            width: this.state.imgWrap.width
-                         }}>
-                        <Draggable ref={(draggable)=>{
-                            this.draggable = draggable;
-                        }}>
-                            <img draggable="false" id={this.imgId}
-                                 onLoad={this.onLoadHandler.bind(this)}
-                                 ref={this.imgId}
-                                 src={file.url}
-                                 alt=""
-                                 style={{
-                                 maxHeight: this.state.maxHeight+'px',
-                                 maxWidth: this.state.maxWidth+'px',
-                                 transform: this.transform,
-                                 ...this.state.modifyImgStyle
-                                 }}/>
-                        </Draggable>
-                    </div>
-                    <div className="icon-box">
-                        <div onClick={this.cssEnhance.bind(this,'rotate')} className="upload-icon" name="radio_unchecked" alt="旋转"></div>
-                        <div onClick={this.cssEnhance.bind(this,'max')} className="upload-icon"  name="add" alt="放大"></div>
-                        <div onClick={this.cssEnhance.bind(this,'min')} className="upload-icon" name="remove" alt="缩小"></div>
-                    </div>
+            <div>
+                <div className={"img-wrap "+ (this.props.overflow? 'img-wrap-hidden':'img-wrap-show')}
+                     style={{
+                        height: this.state.imgWrap.height,
+                        width: this.state.imgWrap.width
+                     }}>
+                    <Draggable ref={(draggable)=>{
+                        this.draggable = draggable;
+                    }}>
+                        <img draggable="false" id={this.imgId}
+                             onLoad={this.onLoadHandler.bind(this)}
+                             ref={this.imgId}
+                             src={file.url}
+                             alt=""
+                             style={{
+                             maxHeight: this.state.maxHeight+'px',
+                             maxWidth: this.state.maxWidth+'px',
+                             transform: this.transform,
+                             ...this.state.modifyImgStyle
+                             }}/>
+                    </Draggable>
                 </div>
-            </Modal>
+                <div className="icon-box">
+                    <div onClick={this.cssEnhance.bind(this,'rotate')} className="upload-icon" name="radio_unchecked" alt="旋转"></div>
+                    <div onClick={this.cssEnhance.bind(this,'max')} className="upload-icon"  name="add" alt="放大"></div>
+                    <div onClick={this.cssEnhance.bind(this,'min')} className="upload-icon" name="remove" alt="缩小"></div>
+                </div>
+            </div>
         );
     }
 }
