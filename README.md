@@ -14,3 +14,4 @@ babel script.js --out-file script-compiled.js
 # or watch it
 babel script.js --watch --out-file script-compiled.js
 ```
+

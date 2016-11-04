@@ -72,8 +72,3 @@ window.onload = function(){
         }
     }
 };
-
-
-
-
-

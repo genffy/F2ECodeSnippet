@@ -8,13 +8,14 @@
 import React, {Component} from 'react'
 import ReactDom from 'react-dom'
 import ImageView from './imgview'
+import '../scss/imageview.scss'
 
 const loop = function(){};
 
 class ModalTemplate extends Component {
     static defaultProps = {
         okCallback: loop,
-        cancelCallback: loop,
+        cancelCallback: loop
     };
 
     constructor(props, context){
@@ -39,7 +40,7 @@ class ModalTemplate extends Component {
                 <div className="modal-mask"></div>
                 <div className="modal-wrap">
                     <div className="modal-header">
-                        <span className="close" onClick={::this.closeHandler()}></span>
+                        <span className="close" onClick={::this.closeHandler()}/>
                         <h2>{title}</h2>
                     </div>
                     <div className="modal-body">
