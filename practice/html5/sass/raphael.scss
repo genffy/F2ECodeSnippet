@@ -1,0 +1,41 @@
+/*body {
+  height: 1000px;
+  position: relative;
+  width: 1000px;
+}
+#arrows {
+  display: block;
+  height: 500px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 500px;
+}
+#arrows circle,
+#arrows path {
+  stroke-opacity: 1;
+  stroke-width: 2;
+}*/
+body {
+  background: #fff;
+  color: #000;
+  font: 300 100.1% "Helvetica Neue", Helvetica, "Arial Unicode MS", Arial, sans-serif;
+}
+#arrows {
+  height: 480px;
+  left: 50%;
+  margin: -240px 0 0 -320px;
+  position: absolute;
+  top: 50%;
+  width: 640px;
+}
+#copy {
+  bottom: 0;
+  font: 300 .7em "Helvetica Neue", Helvetica, "Arial Unicode MS", Arial, sans-serif;
+  position: absolute;
+  right: 1em;
+  text-align: right;
+}
+#copy a {
+  color: #fff;
+}
