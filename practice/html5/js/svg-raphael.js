@@ -62,13 +62,14 @@ Raphael.fn.connection = function (obj1, obj2, line, bg, arrow) {
     }
 };
 
+// TODO 关于<object> onload 事件的深入
 function objLoad(){
     $(document.getElementById('flow').contentDocument).find('#rect_zsjyj').click(function(evt) {
         console.log('你点到我了', evt)
     })
 }
 
-$(function() {
+function drawPath() {
     var paper = Raphael("arrows", 940, 738),
         connections = [],
         shapes = [
@@ -126,4 +127,9 @@ $(function() {
 
     connections.push(paper.connection(shapes[13], shapes[6], "#000", "#fff"));
     connections.push(paper.connection(shapes[14], shapes[7], "#000", "#fff"));
+}
+
+
+$(function() {
+    // drawPath();
 });
