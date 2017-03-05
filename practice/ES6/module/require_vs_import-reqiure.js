@@ -2,7 +2,7 @@
 // 对于条件引用的情况下，包大小的情况
 
 const random = Math.random()
-let result = null
+let result = 0.5
 if(random < 0.3){
     result = require('./files/f03')
 }

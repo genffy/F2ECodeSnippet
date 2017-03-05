@@ -6,7 +6,7 @@ import f08 from './files/f08'
 import f00 from './files/f00'
 
 const random = Math.random()
-let result = null
+let result = 0.5
 if(random < 0.3){
     result = f03
 }
