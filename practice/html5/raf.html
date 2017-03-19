@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .article {
+            margin: auto;
+            width: 15%;
+        }
+    </style>
+</head>
+<body>
+<div class="article">
+    <h1 class="title">前端动画“大比拼”</h1>
+
+    <!-- 作者区域 -->
+    <div class="author">
+        <a class="avatar" href="/u/3e07a60bad19">
+            <img src="http://cdn-qn0.jianshu.io/assets/default_avatar/7-0993d41a595d6ab6ef17b19496eb2f21.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/144/h/144" alt="144">
+        </a>          <div class="info">
+        <span class="tag">作者</span>
+        <span class="name"><a href="/u/3e07a60bad19">zyfEve</a></span>
+        <!-- 关注用户按钮 -->
+        <a class="btn btn-success follow"><i class="iconfont ic-follow"></i><span>关注</span></a>
+        <!-- 文章数据信息 -->
+        <div class="meta">
+            <!-- 如果文章更新时间大于发布时间，那么使用 tooltip 显示更新时间 -->
+            <span class="publish-time">2016.12.15 14:58</span>
+            <span class="wordage">字数 848</span>
+            <span class="views-count">阅读 47</span><span class="comments-count">评论 0</span><span class="likes-count">喜欢 0</span></div>
+    </div>
+        <!-- 如果是当前作者，加入编辑按钮 -->
+    </div>
+    <!-- -->
+
+    <!-- 文章内容 -->
+    <div class="show-content">
+        <p><strong>Javscript 动画（setTimeout、setInterval）</strong><br> 1.性能不佳，因为需要不断获取和修改Dom的布局，所以导致了大量页面重排（repaint）<br> 2.缺乏标准，不同的库使用了不同的API，导致即使是简单的动画也有各不相同的实现方式，调整起来比较耗时<br> 3.带宽消耗，相对丰富的动画库代码量都很大，结果就是增加了http请求的大小，降低了页面的载入时间</p>
+        <p><strong>CSS3动画 （transition、animation）</strong><br><strong>优势：</strong><br>1.通过优化DOM操作，避免内存消耗来减少卡顿<br>2.使用与 RAF（requestAnimationFrame） 类似的机制<br>3.强制使用硬件加速 （通过 GPU 来提高动画性能）<br><strong>总的来书，css 动画相比与JS更轻量，性能更好，更易于实现，同时也不必担心缺乏标准和增加带宽消耗的问题。</strong><br><strong>缺陷：</strong><br>1.Transition 强制使用了 GPU 的硬件加速。导致浏览器一直处于高负荷运转的状态，这反而会让动画变的卡顿。这在移动浏览器上更为严重。（当数据在浏览器的主线程和合成线程之间频繁传输的时候特别消耗性能，故容易导致卡顿。某些 CSS 属性，不会受到影响。）<br>2.IE 10以下的浏览器不支持 transition。<br>3.transition 不能完全被 Javascript 控制（只能通过 Javascript 来触发 transition），因为浏览器不知道如何同时让 Javascript 控制动画又同时优化动画的性能。<br>4.不是所有属性都能参与动画、动画缓动效果太少、无法完全控制动画过程。</p>
+        <div><button id="scrollButton">点击我试试看有什么效果呀</button></div>
+        <p><strong>html5 动画（canvas、svg、webgl）</strong><br>其中svg做为一种可缩放矢量图形的实现是基于xml标签定义的，它有专门的animate标签来定义动画。而为canvas或者webgl实现动画则需要通过 requestAnimationFrame (简称 raf) 来定期刷新画布。<br><strong>RAF主要手段：</strong><br>1.减少DOM样式属性查询，DOM样式属性的查询惠导致页面重排，从而消耗性能，通过将属性保存在JS变量中就可以避免在动画时去查询，从而减少卡顿。<br>2.使用性能更好的 css transform替代改变绝对定位元素的定位属性<br>3.在移动设备上使用 3d 硬件加速，最简单办法就是添加-webkit-transform:translateZ(0)，原因是移动端的显卡有很强的图形渲染能力，而每个应用的 webview 内存却是极其有限的。</p>
+        <p><strong>RAF 相比setTimeout、setInterval的优势：</strong><br>1、requestAnimationFrame 会把每一帧中的所有DOM操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。<br>2、在隐藏或不可见的元素中，requestAnimationFrame将不会进行重绘或回流，这当然就意味着更少的的cpu，gpu和内存使用量。<br><strong>总的来说，requestAnimationFrame 是专门为实现高性能的帧动画而设计的一个API。  </strong></p>
+    </div>
+</div>
+</body>
+<script>
+    (function() {
+        var lastTime = 0;
+        var vendors = ['webkit', 'moz'];
+        for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+            window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+            window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] ||    // name has changed in Webkit
+                window[vendors[x] + 'CancelRequestAnimationFrame'];
+        }
+
+        if (!window.requestAnimationFrame) {
+            window.requestAnimationFrame = function(callback, element) {
+                var currTime = new Date().getTime();
+                var timeToCall = Math.max(0, 16.7 - (currTime - lastTime));
+                var id = window.setTimeout(function() {
+                    callback(currTime + timeToCall);
+                }, timeToCall);
+                lastTime = currTime + timeToCall;
+                return id;
+            };
+        }
+        if (!window.cancelAnimationFrame) {
+            window.cancelAnimationFrame = function(id) {
+                clearTimeout(id);
+            };
+        }
+    }());
+    document.getElementById("scrollButton").onclick = function() {
+        var nowScroll = document.body.scrollTop,
+            flag = "up",
+            funScroll = function() {
+            var top = document.body.scrollTop;
+            if (flag == "up") {
+                top -= 20;
+                if (top <=0) {
+                    top = 0; flag = "down";
+                }
+            } else if (flag == "down") {
+                top += 20;
+                if(top >= nowScroll) {
+                    top = nowScroll;
+                    flag = "stop";
+                }
+            } else {
+                return;
+            }
+            document.body.scrollTop = top;
+            requestAnimationFrame(funScroll);
+        };
+        if (nowScroll) {
+            funScroll()
+        }
+    };
+</script>
+</html>
