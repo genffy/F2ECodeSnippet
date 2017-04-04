@@ -1,0 +1,51 @@
+html, body {
+  font-family: 'Microsoft Yahei',Tahoma,Helvetica,Arial,sans-serif;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-size: 10px; }
+
+section {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  color: #fff; }
+
+@keyframes twinkling {
+  0% {
+    opacity: .2; }
+  50% {
+    opacity: 1; }
+  100% {
+    opacity: .2; } }
+.handler {
+  animation-name: twinkling;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+  position: absolute;
+  margin: 0 auto;
+  padding: 0;
+  bottom: 1.5rem;
+  width: 1rem;
+  height: 1rem;
+  background: transparent;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 0 1em #fff; }
+
+.page1 {
+  background-color: #f5da55; }
+
+.page2 {
+  background-color: #ce4844; }
+
+.page3 {
+  background-color: #1b809e; }
+
+/*# sourceMappingURL=animation.css.map */

@@ -1,0 +1,86 @@
+@charset "UTF-8";
+html, body {
+  padding: 0;
+  font-size: 16px; }
+
+.ad-list {
+  overflow: hidden;
+  /*简单的处理清除浮动*/
+  margin: 20px auto;
+  padding: 10px 0; }
+  .ad-list .ad-item {
+    list-style: none;
+    display: inline-block;
+    width: 113px;
+    height: 113px;
+    padding: 5px; }
+    .ad-list .ad-item .ad {
+      border: 1px solid #ccc;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%; }
+      .ad-list .ad-item .ad a {
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        text-decoration: none; }
+        .ad-list .ad-item .ad a img {
+          width: 100%;
+          height: 100%; }
+      .ad-list .ad-item .ad .cover, .ad-list .ad-item .ad .content, .ad-list .ad-item .ad .animate {
+        position: absolute;
+        width: 100%;
+        height: 100%; }
+      .ad-list .ad-item .ad .animate {
+        transition-property: bottom;
+        transition-duration: 300ms;
+        transition-timing-function: ease; }
+        .ad-list .ad-item .ad .animate .cover, .ad-list .ad-item .ad .animate .content {
+          top: 0; }
+        .ad-list .ad-item .ad .animate .cover {
+          background: #00a57f;
+          opacity: .8; }
+        .ad-list .ad-item .ad .animate .content {
+          z-index: 100;
+          color: #fff;
+          padding: 0.5rem;
+          box-sizing: border-box; }
+          .ad-list .ad-item .ad .animate .content h1, .ad-list .ad-item .ad .animate .content p {
+            margin: 0; }
+          .ad-list .ad-item .ad .animate .content h1 {
+            margin-bottom: 5px;
+            font-size: 1.5rem; }
+          .ad-list .ad-item .ad .animate .content p {
+            font-size: 0.9rem; }
+      .ad-list .ad-item .ad.top .animate {
+        transition-property: top;
+        top: -100%;
+        left: 0; }
+      .ad-list .ad-item .ad.top:hover .animate {
+        transition-property: top;
+        top: 0; }
+      .ad-list .ad-item .ad.left .animate {
+        transition-property: left;
+        left: -100%;
+        top: 0; }
+      .ad-list .ad-item .ad.left:hover .animate {
+        transition-property: left;
+        left: 0; }
+      .ad-list .ad-item .ad.right .animate {
+        transition-property: left;
+        left: 100%;
+        top: 0; }
+      .ad-list .ad-item .ad.right:hover .animate {
+        transition-property: left;
+        left: 0; }
+      .ad-list .ad-item .ad.bottom .animate {
+        transition-property: top;
+        top: 100%;
+        left: 0; }
+      .ad-list .ad-item .ad.bottom:hover .animate {
+        transition-property: top;
+        top: 0; }
+
+/*# sourceMappingURL=transition.css.map */

@@ -2,10 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>monitor</title>
+    <link rel="stylesheet" href="./scss/monitor.css">
 </head>
 <body>
+<div class="option">
+    <h1>改变帧率</h1>
+    <button class="btn" value="lowfps">低帧率</button>
+    <button class="btn" value="jumpframe">跳帧</button>
+    <button class="btn" value="normal">正常</button>
+</div>
+<div class="space" id="space">
+    <div class="matrix" id="matrix"></div>
+</div>
 
+<div class="box-count-control" style="display: none;">
+    <select id="box-count-change"></select>
+</div>
+<script type="text/x-box-template" id="box-template">
+    <div class="box">
+        <span class="surface front"></span>
+        <span class="surface back"></span>
+        <span class="surface top"></span>
+        <span class="surface bottom"></span>
+        <span class="surface left"></span>
+        <span class="surface right"></span>
+    </div>
+</script>
 </body>
+<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="./libs/stat.min.js"></script>
+<script src="./scripts/monitor.js"></script>
 </html>

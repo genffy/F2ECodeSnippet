@@ -1,0 +1,87 @@
+.space {
+  position: absolute;
+}
+.matrix {
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.box {
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.surface {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid #000;
+  box-sizing: border-box;
+}
+.box-count-control {
+  position: absolute;
+  right: 5%;
+  bottom: 5%;
+  line-height: 12px;
+  font-size: 12px;
+}
+.box-count-control input {
+  text-align: right;
+  width: 40px;
+}
+.transition {
+  -webkit-transition: -webkit-transform 1.5s linear;
+  -moz-transition: -webkit-transform 1.5s linear;
+  -ms-transition: -webkit-transform 1.5s linear;
+  -o-transition: -webkit-transform 1.5s linear;
+  transition: -webkit-transform 1.5s linear;
+}
+.css-animate {
+  -webkit-animation: demo-animate 1.5s linear;
+  -moz-animation: demo-animate 1.5s linear;
+  -ms-animation: demo-animate 1.5s linear;
+  -o-animation: demo-animate 1.5s linear;
+  animation: demo-animate 1.5s linear;
+}
+@-webkit-keyframes demo-animate {
+  0% {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+  }
+  100% {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+  }
+}
+
+#stats { opacity: 0.6 !important; }
+
+.option {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  button{
+    cursor: pointer;
+  }
+}

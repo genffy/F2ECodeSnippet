@@ -1,0 +1,69 @@
+body, html {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  font-size: 16px; }
+
+@keyframes load_animation {
+  0% {
+    background-color: #24ffff; }
+  25% {
+    background-color: #181636; }
+  50% {
+    background-color: #fa8700; }
+  75% {
+    background-color: #ed3d20; }
+  100% {
+    background-color: #24ffff; } }
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.load {
+  position: relative;
+  width: 100px;
+  height: 100px; }
+  .load .square {
+    float: left;
+    height: 50%;
+    width: 50%;
+    box-sizing: border-box;
+    background-color: currentColor; }
+    .load .square.s0 {
+      color: #24ffff; }
+    .load .square.s1 {
+      color: #181636; }
+    .load .square.s2 {
+      color: #ed3d20; }
+    .load .square.s3 {
+      color: #fa8700; }
+    .load .square:before {
+      position: absolute;
+      content: " ";
+      right: -100px;
+      top: 0;
+      width: 100px;
+      height: 100px;
+      display: none;
+      z-index: 1000; }
+
+.result {
+  position: absolute;
+  content: " ";
+  right: -100px;
+  top: 0;
+  width: 100px;
+  height: 100px;
+  animation: load_animation 4s ease infinite; }
+
+.square:hover {
+  cursor: pointer; }
+  .square:hover:before {
+    display: block;
+    background-color: currentColor; }
+  .square:hover ~ .result {
+    animation-play-state: paused; }
+
+/*# sourceMappingURL=load.css.map */
