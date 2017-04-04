@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ball</title>
+    <link rel="stylesheet" href="./scss/canvas.css">
+</head>
+<body>
+<div id="block"></div>
+<script src="./libs/stat.min.js"></script>
+<script>
+    function Animator(duration, progress, easing){
+        this.duration = duration;
+        this.progress = progress;
+        this.easing = easing || function(p){return p};
+    }
+    Animator.prototype = {
+        start: function(finished){
+            var startTime = Date.now();
+            var duration = this.duration,
+                self = this;
+            requestAnimationFrame(function step(){
+                var p = (Date.now() - startTime) / duration; //计算出 p，p 从 0~1
+                var next =  true; //是否需要绘制下一帧
+
+                if(p < 1.0){
+                    //如果动画还没播放到最后一帧，执行 progress 动作播放当前一帧
+                    self.progress(self.easing(p), p);
+                }else{
+                    //如果播放到最后一帧，看一下有没有 finished 标记
+                    //finished 用来设置动画是否可以结束
+                    //如果 finished 为 undefined 或者 true，那么动画播放完就结束
+                    //如果 finished 为 false
+                    //那么动画不结束，重头开始播放（通过修改 startTime））
+                    //finished 还可以是一个 function
+                    //如果是 funciton，会先执行这个函数，然后判断它的返回值是否为 false
+                    //如果返回值不为 false，也将正常结束动画
+                    //否则也是动画不结束，重头开始播放
+                    if(typeof finished === 'function'){
+                        next = finished() === false;
+                    }else{
+                        next = finished === false;
+                    }
+
+                    if(!next){
+                        //动画已经结束，播放 p = 1.0 的这一帧，然后结束
+                        self.progress(self.easing(1.0), 1.0);
+                    }else{
+                        //因为 finished 传了 false 所以动画不结束
+                        startTime += duration; //修改startTime，让动画重新开始播放
+                        p -= 1.0;
+
+                        //播放当前帧
+                        self.progress(self.easing(p), p);
+                    }
+                }
+
+                //next 有两种情况为 true，一是 p < 1.0，动画还没播放完
+                //二是 p >= 1.0 但是 finished 为 false
+                if(next) requestAnimationFrame(step);
+            });
+        }
+    };
+
+    function AnimationQueue(animators){
+        this.animators = animators || [];
+    }
+
+    AnimationQueue.prototype = {
+        status: 'ready',
+        append: function(){
+            var args = [].slice.call(arguments);
+            this.animators.push.apply(this.animators, args);
+        },
+        flush: function(){
+            if(this.animators.length){
+                var self = this;
+
+                function play(){
+                    var animator = self.animators.shift();
+
+                    if(animator instanceof Animator){
+                        animator.start(function(){
+                            if(self.animators.length){
+                                play();
+                            }
+                        });
+                    }else{
+                        animator.apply(self);
+                        if(self.animators.length){
+                            play();
+                        }
+                    }
+                }
+                play();
+            }
+        }
+    };
+
+    var T = 1414, //初始下落时长
+        S = 200,  //初始下落位移
+        reduction = 0.8; //衰减系数，每次弹起速度与落地速度的衰减比例
+
+    var a1 = new Animator(T,  function(p){
+        var ty = this.distance * (p * p - 1);
+        block.style.transform = 'translateY(' + ty + 'px)';
+    });
+
+    var a2 = new Animator(T,  function(p){
+        var ty = this.distance * p * (2-p);
+        block.style.transform = 'translateY(' + ty + 'px)';
+    });
+
+    a1.distance = S;
+    a2.distance = -S; //设置初始位移
+
+    var animators = new AnimationQueue();
+
+    function foo(){
+        a2.duration *= reduction; //时间减少比例与速度衰减相同
+        a2.distance *= reduction * reduction; //高度衰减比例与时间平方成比例
+
+        if(a2.duration <= 0.0001){
+            console.log('done');
+            animators.animators.length = 0;
+        }
+    }
+
+    animators.append(a1 ,foo, a2,
+        function b(){
+            a1.duration *= reduction; //时间减少比例与速度衰减相同
+            a1.distance *= reduction * reduction; //高度衰减比例与时间平方成比例
+
+            this.append(a1, foo, a2, b);
+        });
+    animators.flush();
+</script>
+</body>
+</html>
