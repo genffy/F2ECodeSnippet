@@ -362,6 +362,11 @@ $(function(){
     $('.btn').click(function(){
         var $that = $(this), val = $that.val()
         window.location.search = 'mode='+val
-    })
+    });
+    if(/\bshow=false\b/.test(location.search)){
+        $('.option').hide()
+    }else{
+        $('.option').show()
+    }
 
 });
