@@ -304,11 +304,10 @@ $(function(){
     function bindPause(){
         function checkPause(){
             (
-                location.hash == '#pause' || parent.location.hash == '#pause'
+                location.hash == '#pause'
             ) ? pause() : resume();
         }
         $win.on('hashchange', checkPause);
-        $(parent).on('hashchange', checkPause);
         checkPause();
     }
 
@@ -340,13 +339,11 @@ $(function(){
         var jumpframeModeReg = /\bmode=jumpframe\b/i;
         if (
             lowfpsModeReg.test( location.search )
-            || lowfpsModeReg.test(parent.location.search)
         ) {
             autoPlay(15);
         }
         else if (
             jumpframeModeReg.test( location.search )
-            || jumpframeModeReg.test(parent.location.search)
         ) {
             autoPlay(60);
             setInterval(function(){
