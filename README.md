@@ -15,3 +15,6 @@ babel script.js --out-file script-compiled.js
 babel script.js --watch --out-file script-compiled.js
 ```
 
+### 自动生成目录链接
+- 扫描目录收集各个模块（是否需要个配置文件）
+- 纯静态页面跳转吧。
