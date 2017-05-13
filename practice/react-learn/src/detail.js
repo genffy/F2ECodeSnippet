@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 
-class Detail extends Component {
+export default class Detail extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            text: ''
+            text: 'wqw'
         }
     }
     changeHandle(e) {
@@ -15,7 +15,7 @@ class Detail extends Component {
     render(){
         return (
             <div>
-                <input type="text" onChange={this.changeHandle.bind(this)}/>
+                <input type="text" value={this.state.text} onChange={this.changeHandle.bind(this)}/>
                 <div>
                     {this.state.text}
                 </div>
