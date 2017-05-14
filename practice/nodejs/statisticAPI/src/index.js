@@ -5,7 +5,7 @@ const notifier = require('node-notifier')
 
 const cloneRepo = require('./cloneRepo')
 const getApiUse = require('./getApiUse')
-const url = ''
+const url = require('../config.json').repo_list_url
 
 const req = HTTP.get(url, (res) => {
   res.setEncoding('utf8')
