@@ -1,26 +1,25 @@
-import React, {Component} from 'react'
-import {render} from 'react-dom'
-import {Router, Route, Redirect, Link} from 'react-router-dom'
-import createHashHistory from 'history/createHashHistory'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { AppContainer } from 'react-hot-loader'
 
-import Index from './index'
-import Detail from './detail'
+import AppRouter from './router'
 
-class App extends Component {
-    constructor(props) {
-        super(props)
-        this.history = new createHashHistory()
-    }
-    render() {
-        return (
-            <Router history={this.history}>
-                <div>
-                    <Route path='/index' component={Index}/>
-                    <Route path='/detail' component={Detail}/>
-                    <Redirect from="/" to="/index"/>
-                </div>
-            </Router>
-        )
-    }
+import '../styles/index.scss'
+
+const render = (Component) => {
+  ReactDOM.render(
+    <AppContainer>
+      <Component/>
+    </AppContainer>,
+    document.getElementById('app')
+  )
 }
-render( <App/>, document.getElementById('app'))
+
+render(AppRouter)
+
+// 模块热替换的 API
+if (module.hot) {
+  module.hot.accept('./router', () => {
+    render(AppRouter)
+  })
+}
