@@ -4,6 +4,9 @@ import {Router, Route, Redirect, Link} from 'react-router-dom'
 import createHashHistory from 'history/createHashHistory'
 
 import Index from './index'
+import Chart from './chart'
+
+import './styles/common.scss'
 
 class App extends Component {
     constructor(props) {
@@ -14,7 +17,9 @@ class App extends Component {
         return (
             <Router history={this.history}>
                 <div>
-                    <Route path='/' component={Index}/>
+                    <Route path='/index' component={Index}/>
+                    <Route path='/chart' component={Chart}/>
+                    <Redirect to='/chart' />
                 </div>
             </Router>
         )

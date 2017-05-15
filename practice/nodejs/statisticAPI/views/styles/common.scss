@@ -1,0 +1,19 @@
+body {
+    font-size: 14px;
+}
+// ant rewrite
+.ant-row>div {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+.logo {
+    width: 120px;
+    height: 31px;
+    line-height: 31px;
+    color: #fff;
+    background: #333;
+    border-radius: 6px;
+    margin: 16px 24px 16px 0;
+    float: left;
+    text-align: center;
+}
