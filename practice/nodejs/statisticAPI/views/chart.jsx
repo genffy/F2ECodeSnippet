@@ -13,6 +13,8 @@ import {
     Cascader
  } from 'antd'
 
+import jsonData from '../data.json'
+
 const { Header, Content, Footer } = Layout
 const { Option } = Select
 const { RangePicker } = DatePicker
@@ -49,28 +51,69 @@ export default class Chart extends Component {
         }
     }
     componentDidMount(){
-         var myChart = echarts.init(document.getElementById('main'));
+         var myChart = echarts.init(document.getElementById('main'))
+         const { apiValue, pkgVersion} = this.getData()
+         
+         const xAxisData = Object.keys(apiValue)
+         let seriesData = []
+         xAxisData.map((key)=>{
+            seriesData.push(apiValue[key])
+         })
         // 指定图表的配置项和数据
         var option = {
             title: {
-                text: 'ECharts 入门示例'
+                text: 'jsBrige API 使用统计'
             },
             tooltip: {},
             legend: {
-                data:['销量']
+                data:['API']
             },
             xAxis: {
-                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+                axisLabel:{
+                    rotate: 90,
+                    interval: 0,
+                },
+                interval:1,
+                data: xAxisData//["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
             },
             yAxis: {},
             series: [{
-                name: '销量',
+                name: 'API',
                 type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
+                data: seriesData//[5, 20, 36, 10, 10, 20]
             }]
         };
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
+    }
+    getData() {
+        let apiValue = {}
+        let pkgVersion = {}
+        jsonData.map(({apis, params})=>{
+            if(params.name && params.version){
+                if(pkgVersion[params.name]){
+                    pkgVersion[params.name].push(params.version)
+                }else{
+                    pkgVersion[params.name] = [params.version]
+                }
+            }
+            apis.map((apiItem)=>{
+                Object.keys(apiItem).map((key)=>{
+                    const item = apiItem[key] 
+                    Object.keys(item).map((api)=>{
+                        if(apiValue[api]){
+                            apiValue[api] += item[api]
+                        }else{
+                            apiValue[api] = item[api]
+                        }
+                    })
+                })
+            })
+        })
+        return {
+            apiValue,
+            pkgVersion
+        }
     }
     // 时间变化
     dateOnChange() {
@@ -120,7 +163,7 @@ export default class Chart extends Component {
                             </Row>
                             <Row>
                                 <Col span={24}>
-                                    <div id="main" style={{width: '600px', height: '400px'}}></div>
+                                    <div id="main" style={{width: '100%', height: '600px'}}></div>
                                 </Col>
                             </Row>
                         </div>
