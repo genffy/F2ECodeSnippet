@@ -1,6 +1,13 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
 
-export default class Detail extends Component {
+import {inputChange} from './action'
+
+class Detail extends Component {
+    static propTypes = {
+        textValue: PropTypes.string,
+        loading: PropTypes.bool
+    };
     constructor(props) {
         super(props)
         this.state = {
@@ -8,9 +15,11 @@ export default class Detail extends Component {
         }
     }
     changeHandle(e) {
-        this.setState({
-            text: e.target.value
-        })
+        // this.setState({
+        //     text: e.target.value
+        // })
+        const { dispatch} = this.props
+        dispatch(inputChange(e.target.value))
     }
     render(){
         return (
@@ -23,3 +32,11 @@ export default class Detail extends Component {
         )
     }
 }
+
+export default connect((state)=>{
+    const {text, isFetching} = state
+    return {
+        textValue: text,
+        loading: isFetching
+    }
+})

@@ -15,6 +15,8 @@ export const VisibilityFilters = {
   SHOW_ACTIVE: 'SHOW_ACTIVE'
 };
 
+export const SEARCH_TEXT_CHANGE = 'SEARCH_TEXT_CHANGE'
+
 /*
  * action 创建函数
  */
@@ -29,4 +31,8 @@ export function completeTodo(index) {
 
 export function setVisibilityFilter(filter) {
   return { type: SET_VISIBILITY_FILTER, filter }
+}
+
+export function inputChange(text) {
+    return { type: SEARCH_TEXT_CHANGE, text }
 }
