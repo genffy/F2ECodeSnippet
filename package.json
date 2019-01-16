@@ -4,7 +4,7 @@
   "description": "收集或整理在前端开发过程中，一些解决方案和开发实践",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Genffy/F2ECodeSnippet.git"
+    "url": "git+https://github.com/genffy/F2ECodeSnippet.git"
   },
   "dependencies": {
     "antd": "^2.10.1",
@@ -14,6 +14,8 @@
     "find-in-files": "^0.4.0",
     "history": "^4.6.1",
     "jquery": "^3.1.0",
+    "koa": "^2.6.2",
+    "koa-router": "^7.4.0",
     "moment": "^2.18.1",
     "node-notifier": "^5.1.2",
     "nodegit": "^0.18.3",
@@ -25,6 +27,8 @@
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "redux": "^3.6.0",
+    "socket.io": "^2.2.0",
+    "sqlite3": "^4.0.4",
     "swig": "^1.4.2"
   },
   "devDependencies": {
@@ -63,9 +67,9 @@
     "webpack-stream": "^3.2.0"
   },
   "bugs": {
-    "url": "https://github.com/Genffy/F2ECodeSnippet/issues"
+    "url": "https://github.com/genffy/F2ECodeSnippet/issues"
   },
-  "homepage": "https://github.com/Genffy/F2ECodeSnippet#readme",
+  "homepage": "https://github.com/genffy/F2ECodeSnippet#readme",
   "main": "app.js",
   "scripts": {
     "babel-v": "babel -version",
