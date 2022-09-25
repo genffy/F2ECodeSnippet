@@ -16,7 +16,7 @@
     "jquery": "^3.1.0",
     "koa": "^2.6.2",
     "koa-router": "^7.4.0",
-    "moment": "^2.18.1",
+    "moment": "^2.29.4",
     "node-notifier": "^8.0.1",
     "nodegit": "^0.18.3",
     "pug": "^3.0.1",
